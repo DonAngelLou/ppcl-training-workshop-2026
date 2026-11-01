@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook Pubmat — PPCL Training-Workshop (1080×1350px)</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <style>
+    @page {
+      size: 1080px 1350px;
+      margin: 0;
+    }
+
+    .fb-pubmat {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06152D;
+      color: #FFFFFF;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .backdrop-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+    }
+
+    .editorial-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 46% at 50% 46%, rgba(5, 17, 38, 0.84) 0%, rgba(5, 17, 38, 0.54) 65%, rgba(4, 12, 28, 0.28) 100%),
+        linear-gradient(180deg, rgba(4, 14, 32, 0.72) 0%, rgba(6, 20, 45, 0.18) 26%, rgba(6, 20, 45, 0.28) 66%, rgba(4, 12, 28, 0.78) 100%);
+      z-index: 1;
+    }
+
+    .architectural-border {
+      position: absolute;
+      inset: 22px;
+      border: 1.5px solid rgba(229, 193, 88, 0.55);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .architectural-border::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(229, 193, 88, 0.22);
+    }
+
+    .pubmat-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      padding: 52px 64px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* 1. Top Authority Header */
+    .inst-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(229, 193, 88, 0.38);
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .logo-circle {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .inst-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .inst-copy .rep {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .inst-copy .lgu {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F8FAFC;
+    }
+
+    .inst-copy .lib {
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      margin-top: 2px;
+    }
+
+    /* 2. Focal Typographic Lockup */
+    .focal-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .overline-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .overline-rule {
+      width: 56px;
+      height: 1.5px;
+      background: var(--gold-bright);
+    }
+
+    .overline-text {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .headline-1 {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      line-height: 1.04;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      text-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    .headline-bridge {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 34px;
+      font-weight: 600;
+      color: #F3E3B2;
+      margin: 6px 0 4px;
+    }
+
+    .headline-2 {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.08;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFF6D1 0%, #E8C35A 55%, #C59620 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.55));
+    }
+
+    .logistics-strip {
+      margin-top: 32px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      border-top: 1.5px solid rgba(229, 193, 88, 0.65);
+      border-bottom: 1.5px solid rgba(229, 193, 88, 0.65);
+      background: rgba(6, 20, 45, 0.72);
+      backdrop-filter: blur(8px);
+      padding: 16px 24px;
+    }
+
+    .log-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .log-label {
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .log-value {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .log-divider {
+      width: 1.5px;
+      height: 38px;
+      background: rgba(229, 193, 88, 0.45);
+    }
+
+    /* 3. Architectural Roster Panel */
+    .roster-panel {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(7, 22, 48, 0.9) 0%, rgba(4, 13, 30, 0.96) 100%);
+      border-top: 2.5px solid var(--gold-rich);
+      border-bottom: 1px solid rgba(229, 193, 88, 0.4);
+      backdrop-filter: blur(12px);
+      padding: 26px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .roster-kicker {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+    }
+
+    .spk-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      border-right: 1px solid rgba(229, 193, 88, 0.28);
+    }
+
+    .spk-col:last-child {
+      border-right: none;
+    }
+
+    .spk-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: #FFFFFF;
+    }
+
+    .spk-role {
+      margin-top: 5px;
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .panel-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.4), transparent);
+    }
+
+    .officials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+    }
+
+    .off-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 14px;
+      border-right: 1px solid rgba(229, 193, 88, 0.28);
+    }
+
+    .off-col:last-child {
+      border-right: none;
+    }
+
+    .off-name {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+    }
+
+    .off-role {
+      margin-top: 4px;
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7CC4FA;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>7. Facebook Pubmat (Announcement Poster)</h1>
+      <span class="spec-badge">4:5 Portrait • Editorial Poster • 1080×1350px</span>
+    </div>
+    <div class="toolbar-actions">
+      <a href="06-fb-banner.html" class="btn-outline" style="text-decoration:none;">← View FB Banner</a>
+      <button class="btn-gold" onclick="window.print()">🖨️ Save PDF / Export</button>
+    </div>
+  </div>
+
+  <section class="fb-pubmat print-page" id="fb-pubmat-canvas">
+    <img class="backdrop-img" src="shared/bg_archival_tarp.jpg" alt="" />
+    <div class="editorial-scrim"></div>
+    <div class="architectural-border"></div>
+
+    <div class="pubmat-content">
+      <header class="inst-header">
+        <div class="logos-row">
+          <div class="logo-circle"><img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" /></div>
+          <div class="logo-circle"><img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" /></div>
+          <div class="logo-circle"><img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" /></div>
+        </div>
+        <div class="inst-copy">
+          <span class="rep" contenteditable="true">Republic of the Philippines</span>
+          <span class="lgu" contenteditable="true">City Government of Puerto Princesa</span>
+          <span class="lib" contenteditable="true">Puerto Princesa City Library</span>
+        </div>
+      </header>
+
+      <div class="focal-center">
+        <div class="overline-bar">
+          <span class="overline-rule"></span>
+          <span class="overline-text" contenteditable="true">Three-Day Archival Capacity-Building Program</span>
+          <span class="overline-rule"></span>
+        </div>
+
+        <h2 class="headline-1" contenteditable="true">Training-Workshop</h2>
+        <div class="headline-bridge" contenteditable="true">on Basic Preservation and Conservation of</div>
+        <h3 class="headline-2" contenteditable="true">Paper-Based Collections</h3>
+
+        <div class="logistics-strip">
+          <div class="log-col">
+            <span class="log-label">Date</span>
+            <span class="log-value" contenteditable="true">November 4–6, 2026</span>
+          </div>
+          <div class="log-divider"></div>
+          <div class="log-col">
+            <span class="log-label">Venue</span>
+            <span class="log-value" contenteditable="true">Puerto Princesa City Library</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="roster-panel">
+        <div class="roster-kicker">Distinguished Resource Speakers</div>
+        <div class="speakers-grid">
+          <div class="spk-col">
+            <div class="spk-name" contenteditable="true">ALEXANDER O. VETUS</div>
+            <div class="spk-role" contenteditable="true">Resource Speaker</div>
+          </div>
+          <div class="spk-col">
+            <div class="spk-name" contenteditable="true">GENKIE R. ALBANO</div>
+            <div class="spk-role" contenteditable="true">Resource Speaker</div>
+          </div>
+          <div class="spk-col">
+            <div class="spk-name" contenteditable="true">GERALDINE S. FRANCIA</div>
+            <div class="spk-role" contenteditable="true">Resource Speaker</div>
+          </div>
+        </div>
+
+        <div class="panel-rule"></div>
+
+        <div class="officials-grid">
+          <div class="off-col">
+            <div class="off-name" contenteditable="true">DON ANGEL LOU M. SALVATIERRA</div>
+            <div class="off-role" contenteditable="true">Moderator / Facilitator</div>
+          </div>
+          <div class="off-col">
+            <div class="off-name" contenteditable="true">JOYMARIE B. OLAPE, RL</div>
+            <div class="off-role" contenteditable="true">City Librarian</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+</body>
+</html>

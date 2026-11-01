@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Tag Sticker Design — 8 per A4 Sheet (All 28 Attendees Loaded)</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <script src="shared/ornaments.js"></script>
+  <style>
+    @page {
+      size: 210mm 297mm;
+      margin: 0;
+    }
+
+    .a4-sheet {
+      width: 210mm;
+      height: 297mm;
+      background: #FFFFFF;
+      /* Very narrow outer margin for A4 sticker paper */
+      padding: 2.5mm 3mm;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 2 Columns x 4 Rows = 8 Name Tags Grid filling the entire A4 sheet */
+    .nametag-grid {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 1.2mm;
+    }
+
+    .nametag-card {
+      border: 0.8px dashed #94A3B8;
+      padding: 0.8mm;
+      background: #FFFFFF;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nametag-inner {
+      width: 100%;
+      height: 100%;
+      border: 2.2px solid var(--navy-royal);
+      outline: 1px solid var(--gold-rich);
+      outline-offset: -2.2mm;
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse at 50% 45%, #FFFDF9 0%, #F5ECDC 70%, #E7D6B9 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top Header Band inside each sticker badge (No hole/slot) */
+    .tag-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 2.8mm 3.5mm 1.5mm;
+      z-index: 2;
+    }
+
+    .tag-header img {
+      width: 10.5mm;
+      height: 10.5mm;
+      object-fit: contain;
+    }
+
+    .tag-header-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      line-height: 1.14;
+    }
+
+    .tag-header-text .sub {
+      font-family: var(--font-serif);
+      font-size: 6.2pt;
+      font-weight: 700;
+      color: var(--ink-body);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag-header-text .org {
+      font-family: var(--font-display);
+      font-size: 8.2pt;
+      font-weight: 800;
+      color: var(--blue-cerulean);
+      letter-spacing: 0.06em;
+    }
+
+    /* Event Title Strip */
+    .tag-event-banner {
+      background: linear-gradient(90deg, var(--navy-deep) 0%, var(--navy-royal) 50%, var(--navy-deep) 100%);
+      color: #FFFFFF;
+      border-top: 1.4px solid var(--gold-rich);
+      border-bottom: 1.4px solid var(--gold-rich);
+      padding: 1.8mm 3.5mm;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .tag-event-banner .title {
+      font-family: var(--font-display);
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 1.22;
+      color: #FFFDF8;
+      text-transform: uppercase;
+    }
+
+    .tag-event-banner .meta {
+      font-family: var(--font-sans);
+      font-size: 6pt;
+      font-weight: 700;
+      color: var(--gold-bright);
+      letter-spacing: 0.07em;
+      margin-top: 0.6mm;
+    }
+
+    /* Name & Institution Area */
+    .tag-name-zone {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2mm 4.5mm;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tag-watermark {
+      position: absolute;
+      width: 32mm;
+      height: 32mm;
+      opacity: 0.055;
+      pointer-events: none;
+      object-fit: contain;
+    }
+
+    .tag-name {
+      font-family: var(--font-display);
+      font-size: 12.6pt;
+      font-weight: 800;
+      color: var(--navy-deep);
+      letter-spacing: 0.025em;
+      line-height: 1.15;
+      border-bottom: 1.5px solid var(--gold-rich);
+      padding-bottom: 1.2mm;
+      width: 100%;
+    }
+
+    .tag-affiliation {
+      margin-top: 1.4mm;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 8.8pt;
+      font-weight: 700;
+      color: var(--navy-royal);
+    }
+
+    /* Bottom Role Bar */
+    .tag-role-bar {
+      padding: 2.2mm 3mm;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      z-index: 2;
+      border-top: 1px solid var(--gold-rich);
+    }
+
+    .role-speaker {
+      background: linear-gradient(90deg, #7A5809 0%, #B88917 50%, #7A5809 100%);
+    }
+
+    .role-moderator {
+      background: linear-gradient(90deg, #005994 0%, #0077C0 50%, #005994 100%);
+    }
+
+    .role-official {
+      background: linear-gradient(90deg, #7A1418 0%, #A91D22 50%, #7A1418 100%);
+    }
+
+    .role-participant {
+      background: linear-gradient(90deg, #091B3A 0%, #163C7A 50%, #091B3A 100%);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>4. Sticker Name Tags (8 per A4 • All 28 Attendees Loaded)</h1>
+      <span class="spec-badge">A4 Portrait • Narrow Margins • No Hole • 4 Sheets (32 Badges)</span>
+    </div>
+    <div class="toolbar-actions">
+      <span style="font-size:12px; opacity:0.85;">Click any name or role to edit live</span>
+      <button class="btn-gold" onclick="window.print()">🖨️ Print All 4 A4 Sticker Sheets</button>
+    </div>
+  </div>
+
+  <div id="sheets-wrapper" style="display:flex; flex-direction:column; gap:32px;"></div>
+
+  <script>
+    function renderBadgeCard(badge) {
+      return `
+        <div class="nametag-card">
+          <div class="nametag-inner">
+            <div class="tag-header">
+              <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+              <img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+              <div class="tag-header-text">
+                <span class="sub">City Government of Puerto Princesa</span>
+                <span class="org">PUERTO PRINCESA CITY LIBRARY</span>
+              </div>
+              <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
+            </div>
+
+            <div class="tag-event-banner">
+              <div class="title">Training-Workshop on Basic Preservation &amp; Conservation of Paper-Based Collections</div>
+              <div class="meta">NOVEMBER 4–6, 2026 • PUERTO PRINCESA CITY LIBRARY</div>
+            </div>
+
+            <div class="tag-name-zone">
+              <img class="tag-watermark" src="logo/ppcitylibrary-logo.png" alt="" />
+              <div class="tag-name" contenteditable="true">${badge.name}</div>
+              <div class="tag-affiliation" contenteditable="true">${badge.sub}</div>
+            </div>
+
+            <div class="tag-role-bar ${badge.roleClass}" contenteditable="true">
+              ${badge.role}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    const allBadges = [
+      // Speakers (3)
+      { name: 'ALEXANDER O. VETUS', sub: 'Puerto Princesa City Library Workshop', role: 'RESOURCE SPEAKER', roleClass: 'role-speaker' },
+      { name: 'GENKIE R. ALBANO', sub: 'Puerto Princesa City Library Workshop', role: 'RESOURCE SPEAKER', roleClass: 'role-speaker' },
+      { name: 'GERALDINE S. FRANCIA', sub: 'Puerto Princesa City Library Workshop', role: 'RESOURCE SPEAKER', roleClass: 'role-speaker' },
+
+      // City Librarian / Participant (1)
+      { name: 'JOYMARIE B. OLAPE, RL', sub: 'City Librarian • Puerto Princesa City Library', role: 'CITY LIBRARIAN / PARTICIPANT', roleClass: 'role-official' },
+
+      // Regular / Plantilla Staff (3)
+      { name: 'DON ANGEL LOU M. SALVATIERRA', sub: 'Regular / Plantilla Staff • PPCL', role: 'MODERATOR / FACILITATOR', roleClass: 'role-moderator' },
+      { name: 'VIVIEN F. BANZUELO, RL', sub: 'Regular / Plantilla Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'IRENE DIANNE A. ESTRADA-TORRES', sub: 'Regular / Plantilla Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+
+      // City Library Job Order Staff (11)
+      { name: 'JUDITH C. ALARO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'IMELDA G. BALDEVIESO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'IYNOR D. CUDIO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'REVELYN O. ELEVERA', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'ROSE ANN R. EROJO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'JENNIFER P. GONZAGA', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'AILEEN R. MANANSALA', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'JOHN CARLO L. NARCISO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'PERLA J. NOBLEJAS', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'JOSEPH P. TAMPIL', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'SELWYN JACOB D. VALLEJO', sub: 'City Library Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+
+      // Satellite Libraries Job Order Staff (10)
+      { name: 'CRISTINA S. DUMARAN', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'KATHRYN MAE C. GAN', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'ANNALYN C. GUANZON', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'ROSENDO A. LANDICHO', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'MARY ROSE T. LUCERO', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'ELLEN JEAN N. MADRID', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'JOAN C. MERCED', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'MYRNA C. PALAO', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'ANNA ELYZZA JANE T. RAMOS', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: 'MARY MAY L. VILLAVICENCIO', sub: 'Satellite Libraries Staff • PPCL', role: 'PARTICIPANT', roleClass: 'role-participant' },
+
+      // 4 Extra Blank / Spare Badges to complete Sheet 4 (32 total)
+      { name: '____________________________', sub: 'Puerto Princesa City Library', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: '____________________________', sub: 'Puerto Princesa City Library', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: '____________________________', sub: 'Puerto Princesa City Library', role: 'PARTICIPANT', roleClass: 'role-participant' },
+      { name: '____________________________', sub: 'Puerto Princesa City Library', role: 'PARTICIPANT', roleClass: 'role-participant' }
+    ];
+
+    const wrapper = document.getElementById('sheets-wrapper');
+    for (let s = 0; s < 4; s++) {
+      const chunk = allBadges.slice(s * 8, (s + 1) * 8);
+      const sheet = document.createElement('section');
+      sheet.className = 'a4-sheet print-page';
+      sheet.id = `nametag-sheet-${s + 1}`;
+      sheet.innerHTML = `<div class="nametag-grid">${chunk.map(renderBadgeCard).join('')}</div>`;
+      wrapper.appendChild(sheet);
+    }
+  </script>
+</body>
+</html>

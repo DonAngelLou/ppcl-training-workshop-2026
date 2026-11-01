@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPCL Training-Workshop Design & Print Studio</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #142C54 0%, #0B1629 65%, #070E1B 100%);
+      color: #F8FAFC;
+      min-height: 100vh;
+      padding: 40px 24px 80px;
+    }
+
+    .hub-container {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .hub-hero {
+      background: linear-gradient(135deg, rgba(14, 43, 92, 0.92) 0%, rgba(7, 23, 51, 0.96) 100%);
+      border: 2px solid var(--gold-rich);
+      border-radius: 20px;
+      padding: 32px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    .hub-hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 780px;
+    }
+
+    .hub-kicker {
+      color: var(--gold-bright);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hub-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #FFFFFF;
+    }
+
+    .hub-meta {
+      font-size: 14.5px;
+      color: #CBD5E1;
+      line-height: 1.55;
+    }
+
+    .hub-logos {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(252, 249, 242, 0.96);
+      padding: 14px 24px;
+      border-radius: 16px;
+      border: 2px solid var(--gold-rich);
+    }
+
+    .hub-logos img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+    }
+
+    .design-card {
+      background: rgba(15, 27, 48, 0.88);
+      border: 1.5px solid rgba(197, 155, 39, 0.45);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .design-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-bright);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 230px;
+      background: #091324;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .card-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-body {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-badge {
+      align-self: flex-start;
+      background: rgba(0, 119, 192, 0.25);
+      border: 1px solid rgba(79, 168, 224, 0.5);
+      color: #93C5FD;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+
+    .card-actions {
+      padding: 14px 22px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-actions a {
+      text-decoration: none;
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-container">
+    <header class="hub-hero">
+      <div class="hub-hero-left">
+        <span class="hub-kicker">Puerto Princesa City Library • Official Event Kit</span>
+        <h1 class="hub-title">Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections</h1>
+        <div class="hub-meta">
+          <strong>Date:</strong> November 4–6, 2026 &nbsp;|&nbsp; <strong>Venue:</strong> Puerto Princesa City Library<br />
+          <strong>Speakers:</strong> Alexander O. Vetus • Genkie R. Albano • Geraldine S. Francia<br />
+          <strong>Moderator/Facilitator:</strong> Don Angel Lou M. Salvatierra &nbsp;|&nbsp; <strong>City Librarian:</strong> Joymarie B. Olape, RL
+        </div>
+      </div>
+      <div class="hub-logos">
+        <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+        <img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+        <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
+      </div>
+    </header>
+
+    <div class="cards-grid">
+      <!-- 1. Speakers Certificate -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/01-certificate-speaker-1-vetus.png" alt="Certificate for Speakers" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">A4 Landscape • 297×210mm</span>
+          <h2 class="card-title">1. Certificate for Speakers &amp; Moderator</h2>
+          <p class="card-desc">Pre-populated A4 certificates for Alexander O. Vetus, Genkie R. Albano, Geraldine S. Francia, and Moderator Don Angel Lou M. Salvatierra, signed by City Librarian Joymarie B. Olape, RL.</p>
+        </div>
+        <div class="card-actions">
+          <a href="01-certificate-speakers.html" class="btn-gold">✏️ Open Interactive Template</a>
+          <a href="exports/pdf/01-certificate-speakers.pdf" class="btn-outline" target="_blank">📄 Print PDF</a>
+        </div>
+      </div>
+
+      <!-- 2. Participants Certificate -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/02-certificate-participants.png" alt="Certificate for Participants" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">A4 Landscape • Batch Name Editor</span>
+          <h2 class="card-title">2. Certificate for Participants</h2>
+          <p class="card-desc">A4 Certificate of Participation signed by all 3 Resource Speakers and the City Librarian. Includes a Batch Participant List generator for multi-page printing.</p>
+        </div>
+        <div class="card-actions">
+          <a href="02-certificate-participants.html" class="btn-gold">✏️ Open &amp; Batch Edit</a>
+          <a href="exports/pdf/02-certificate-participants.pdf" class="btn-outline" target="_blank">📄 Print PDF</a>
+        </div>
+      </div>
+
+      <!-- 3A. Tarpaulin 4:3 -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/03-tarpaulin-4x3.png" alt="Tarpaulin 4:3" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">4:3 Aspect Ratio • 3200×2400px</span>
+          <h2 class="card-title">3A. Tarpaulin Design (4:3 Ratio)</h2>
+          <p class="card-desc">Standard 4:3 event tarpaulin (fits 4ft×3ft or 8ft×6ft print banners) featuring archival heritage styling, all 3 logos, speakers, moderator, and City Librarian.</p>
+        </div>
+        <div class="card-actions">
+          <a href="03-tarpaulin-4x3.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/pdf/03-tarpaulin-4x3.pdf" class="btn-outline" target="_blank">📄 Vector PDF</a>
+          <a href="exports/png/03-tarpaulin-4x3.png" class="btn-outline" target="_blank">🖼️ High-Res PNG</a>
+        </div>
+      </div>
+
+      <!-- 3B. Tarpaulin 16:9 -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/03-tarpaulin-16x9.png" alt="Tarpaulin 16:9" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">16:9 Widescreen • 3840×2160px 4K</span>
+          <h2 class="card-title">3B. Tarpaulin Design (16:9 Ratio)</h2>
+          <p class="card-desc">Widescreen 16:9 stage backdrop &amp; LED presentation wall design with a 5-column speaker &amp; official lineup and archival conservation crest.</p>
+        </div>
+        <div class="card-actions">
+          <a href="03-tarpaulin-16x9.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/pdf/03-tarpaulin-16x9.pdf" class="btn-outline" target="_blank">📄 Vector PDF</a>
+          <a href="exports/png/03-tarpaulin-16x9.png" class="btn-outline" target="_blank">🖼️ 4K PNG</a>
+        </div>
+      </div>
+
+      <!-- 4. Name Tags (8 per A4) -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/04-name-tags-a4-sheet1.png" alt="Name Tags 8 per A4" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">A4 Portrait • 8 Name Tags per Sheet</span>
+          <h2 class="card-title">4. Name Tag Design (8-up on A4)</h2>
+          <p class="card-desc">2×4 precision grid on A4 paper with trim lines and lanyard slot guides. Includes Sheet 1 (Speakers, Moderator, City Librarian) and Sheet 2 (8× Participant badges).</p>
+        </div>
+        <div class="card-actions">
+          <a href="04-name-tags-a4.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/pdf/04-name-tags-a4.pdf" class="btn-outline" target="_blank">📄 Print PDF</a>
+        </div>
+      </div>
+
+      <!-- 5. DIY Notebook Cover -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/05-notebook-cover-2up-longbond.png" alt="DIY Notebook Cover" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">Long Bond 8.5"×13" • Cut Crosswise (2-Up)</span>
+          <h2 class="card-title">5. DIY Notebook Cover (6.5"×8.5" Each)</h2>
+          <p class="card-desc">Prints 2 identical 6.5"×8.5" portrait covers side-by-side on a single 8.5"×13" long bond sheet with a center cut guide and Ex Libris participant nameplate.</p>
+        </div>
+        <div class="card-actions">
+          <a href="05-notebook-cover-longbond.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/pdf/05-notebook-cover-longbond.pdf" class="btn-outline" target="_blank">📄 Print PDF</a>
+          <a href="exports/png/05-notebook-cover-single.png" class="btn-outline" target="_blank">🖼️ Single Cover PNG</a>
+        </div>
+      </div>
+
+      <!-- 6. FB Banner -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/06-fb-banner.png" alt="FB Banner" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">1640×856px • Social Cover / Header</span>
+          <h2 class="card-title">6. Banner for Facebook Post / Cover</h2>
+          <p class="card-desc">Widescreen Facebook event header &amp; link banner highlighting the workshop title, date, venue, speakers, moderator, and City Librarian.</p>
+        </div>
+        <div class="card-actions">
+          <a href="06-fb-banner.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/png/06-fb-banner.png" class="btn-outline" target="_blank">🖼️ High-Res PNG</a>
+        </div>
+      </div>
+
+      <!-- 7. FB Pubmat -->
+      <div class="design-card">
+        <div class="card-thumb">
+          <img src="exports/png/07-fb-pubmat.png" alt="FB Pubmat" />
+        </div>
+        <div class="card-body">
+          <span class="card-badge">1080×1350px (4:5 Portrait Poster)</span>
+          <h2 class="card-title">7. Pubmat for Facebook Post</h2>
+          <p class="card-desc">Official 4:5 portrait social media announcement poster designed for maximum visual impact in Facebook and Instagram feeds.</p>
+        </div>
+        <div class="card-actions">
+          <a href="07-fb-pubmat.html" class="btn-gold">✏️ Open Template</a>
+          <a href="exports/png/07-fb-pubmat.png" class="btn-outline" target="_blank">🖼️ High-Res PNG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

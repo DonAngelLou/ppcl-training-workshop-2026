@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarpaulin Design (16:9 Aspect Ratio) — PPCL Training-Workshop</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <style>
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+
+    .tarp-16x9 {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06152D;
+      color: #FFFFFF;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tarp-backdrop-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+    }
+
+    .tarp-editorial-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 52% 44% at 50% 45%, rgba(5, 17, 38, 0.82) 0%, rgba(5, 17, 38, 0.48) 62%, rgba(4, 12, 28, 0.18) 100%),
+        linear-gradient(180deg, rgba(4, 14, 32, 0.68) 0%, rgba(6, 20, 45, 0.1) 24%, rgba(6, 20, 45, 0.2) 68%, rgba(4, 12, 28, 0.72) 100%);
+      z-index: 1;
+    }
+
+    .tarp-architectural-border {
+      position: absolute;
+      inset: 22px;
+      border: 1.5px solid rgba(229, 193, 88, 0.55);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .tarp-architectural-border::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(229, 193, 88, 0.22);
+    }
+
+    .tarp-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      padding: 42px 88px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 1. Institutional Authority Header */
+    .inst-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(229, 193, 88, 0.38);
+    }
+
+    .inst-logos-group {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo-medallion {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 5px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-medallion img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .inst-agency-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .inst-agency-copy .gov-rep {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .inst-agency-copy .gov-lgu {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F8FAFC;
+    }
+
+    .inst-agency-copy .gov-lib {
+      font-family: var(--font-display);
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      margin-top: 1px;
+    }
+
+    /* 2. Monumental Focal Stage */
+    .focal-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 1580px;
+      margin: auto 0;
+    }
+
+    .overline-lockup {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 14px;
+    }
+
+    .overline-rule {
+      width: 84px;
+      height: 1.5px;
+      background: var(--gold-bright);
+    }
+
+    .overline-text {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .headline-tier-1 {
+      font-family: var(--font-display);
+      font-size: 66px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      line-height: 1.02;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      text-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    .headline-tier-bridge {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 38px;
+      font-weight: 600;
+      color: #F3E3B2;
+      letter-spacing: 0.03em;
+      margin: 4px 0 2px;
+    }
+
+    .headline-tier-2 {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFF6D1 0%, #E8C35A 55%, #C59620 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.55));
+    }
+
+    /* Clean Architectural Logistics Bar */
+    .logistics-bar {
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: center;
+      border-top: 1.5px solid rgba(229, 193, 88, 0.65);
+      border-bottom: 1.5px solid rgba(229, 193, 88, 0.65);
+      background: rgba(6, 20, 45, 0.68);
+      backdrop-filter: blur(6px);
+      padding: 12px 52px;
+      gap: 44px;
+    }
+
+    .logistics-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .logistics-label {
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .logistics-value {
+      font-family: var(--font-sans);
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .logistics-divider {
+      width: 1.5px;
+      height: 36px;
+      background: rgba(229, 193, 88, 0.5);
+    }
+
+    /* 3. Lower-Third 5-Column Architectural Roster Panel */
+    .roster-panel-5col {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(7, 22, 48, 0.88) 0%, rgba(4, 13, 30, 0.95) 100%);
+      border-top: 2px solid var(--gold-rich);
+      border-bottom: 1px solid rgba(229, 193, 88, 0.4);
+      backdrop-filter: blur(10px);
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+    }
+
+    .roster-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px 14px;
+      border-right: 1px solid rgba(229, 193, 88, 0.28);
+    }
+
+    .roster-col:last-child {
+      border-right: none;
+    }
+
+    .roster-role {
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      margin-bottom: 6px;
+    }
+
+    .roster-col.official .roster-role {
+      color: #7CC4FA;
+    }
+
+    .roster-name {
+      font-family: var(--font-display);
+      font-size: 20.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>3B. Tarpaulin Design (16:9 Widescreen)</h1>
+      <span class="spec-badge">16:9 Ratio • Editorial Conference Backdrop • 3840×2160px 4K</span>
+    </div>
+    <div class="toolbar-actions">
+      <a href="03-tarpaulin-4x3.html" class="btn-outline" style="text-decoration:none;">← Switch to 4:3 Ratio</a>
+      <button class="btn-gold" onclick="window.print()">🖨️ Print / Save PDF</button>
+    </div>
+  </div>
+
+  <section class="tarp-16x9 print-page" id="tarp-16x9-canvas">
+    <img class="tarp-backdrop-img" src="shared/bg_archival_tarp.jpg" alt="" />
+    <div class="tarp-editorial-scrim"></div>
+    <div class="tarp-architectural-border"></div>
+
+    <div class="tarp-content">
+      <!-- 1. Institutional Header -->
+      <header class="inst-header">
+        <div class="inst-logos-group">
+          <div class="logo-medallion">
+            <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+          </div>
+          <div class="logo-medallion">
+            <img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+          </div>
+        </div>
+
+        <div class="inst-agency-copy">
+          <span class="gov-rep" contenteditable="true">Republic of the Philippines</span>
+          <span class="gov-lgu" contenteditable="true">City Government of Puerto Princesa</span>
+          <span class="gov-lib" contenteditable="true">Puerto Princesa City Library</span>
+        </div>
+
+        <div class="inst-logos-group">
+          <div class="logo-medallion">
+            <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. Monumental Focal Title Lockup -->
+      <div class="focal-stage">
+        <div class="overline-lockup">
+          <span class="overline-rule"></span>
+          <span class="overline-text" contenteditable="true">Three-Day Archival Capacity-Building Program</span>
+          <span class="overline-rule"></span>
+        </div>
+
+        <h2 class="headline-tier-1" contenteditable="true">Training-Workshop</h2>
+        <div class="headline-tier-bridge" contenteditable="true">on Basic Preservation and Conservation of</div>
+        <h3 class="headline-tier-2" contenteditable="true">Paper-Based Collections</h3>
+
+        <div class="logistics-bar">
+          <div class="logistics-item">
+            <span class="logistics-label">Date</span>
+            <span class="logistics-value" contenteditable="true">November 4–6, 2026</span>
+          </div>
+          <div class="logistics-divider"></div>
+          <div class="logistics-item">
+            <span class="logistics-label">Venue</span>
+            <span class="logistics-value" contenteditable="true">Puerto Princesa City Library</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Lower-Third 5-Column Architectural Roster -->
+      <footer class="roster-panel-5col">
+        <div class="roster-col">
+          <div class="roster-role" contenteditable="true">Resource Speaker</div>
+          <div class="roster-name" contenteditable="true">ALEXANDER O. VETUS</div>
+        </div>
+        <div class="roster-col">
+          <div class="roster-role" contenteditable="true">Resource Speaker</div>
+          <div class="roster-name" contenteditable="true">GENKIE R. ALBANO</div>
+        </div>
+        <div class="roster-col">
+          <div class="roster-role" contenteditable="true">Resource Speaker</div>
+          <div class="roster-name" contenteditable="true">GERALDINE S. FRANCIA</div>
+        </div>
+        <div class="roster-col official">
+          <div class="roster-role" contenteditable="true">Moderator / Facilitator</div>
+          <div class="roster-name" contenteditable="true">DON ANGEL LOU M. SALVATIERRA</div>
+        </div>
+        <div class="roster-col official">
+          <div class="roster-role" contenteditable="true">City Librarian</div>
+          <div class="roster-name" contenteditable="true">JOYMARIE B. OLAPE, RL</div>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIY Notebook Cover — 8.5" × 13" Cut Crosswise &amp; Folded in Middle</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <script src="shared/ornaments.js"></script>
+  <style>
+    @page {
+      size: 8.5in 13in;
+      margin: 0;
+    }
+
+    /* Full 8.5in x 13in Long Bond Sheet (Portrait), cut crosswise at 6.5in into two 8.5in x 6.5in booklet spreads */
+    .longbond-portrait-sheet {
+      width: 8.5in;
+      height: 13in;
+      background: #FFFFFF;
+      display: grid;
+      grid-template-rows: 6.5in 6.5in;
+      position: relative;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    /* Horizontal Crosswise Cut Line at 6.5in */
+    .crosswise-cut-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 6.5in;
+      height: 0;
+      border-top: 1.5px dashed #64748B;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .cut-label-left {
+      position: absolute;
+      left: 8px;
+      top: 6.5in;
+      transform: translateY(-50%);
+      background: #0F172A;
+      color: #F8FAFC;
+      font-family: var(--font-sans);
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      z-index: 51;
+    }
+
+    /* Each 8.5in x 6.5in Crosswise Half-Sheet:
+       Left half (4.25in x 6.5in) = Blank Back Cover
+       Center (at 4.25in) = Fold Line
+       Right half (4.25in x 6.5in) = Front Cover Design */
+    .crosswise-half-spread {
+      width: 8.5in;
+      height: 6.5in;
+      display: grid;
+      grid-template-columns: 4.25in 4.25in;
+      position: relative;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    /* Left Half: Completely Blank Back Cover */
+    .blank-back-half {
+      width: 4.25in;
+      height: 6.5in;
+      background: #FFFFFF;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Subtle helper label visible only on screen, hidden when printing/exporting */
+    .screen-only-blank-hint {
+      border: 1px dashed #CBD5E1;
+      color: #94A3B8;
+      font-family: var(--font-sans);
+      font-size: 9pt;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    body.export-mode .screen-only-blank-hint,
+    body.export-mode .cut-label-left,
+    body.export-mode .fold-badge {
+      display: none !important;
+    }
+
+    @media print {
+      .screen-only-blank-hint,
+      .cut-label-left,
+      .fold-badge {
+        display: none !important;
+      }
+    }
+
+    /* Middle Vertical Fold Line at 4.25in */
+    .center-fold-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 4.25in;
+      width: 0;
+      border-left: 1px dashed rgba(100, 116, 139, 0.45);
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .fold-badge {
+      position: absolute;
+      top: 8px;
+      left: 4.25in;
+      transform: translateX(-50%);
+      background: rgba(14, 43, 92, 0.85);
+      color: var(--gold-bright);
+      font-family: var(--font-sans);
+      font-size: 6pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      z-index: 35;
+      white-space: nowrap;
+    }
+
+    /* Right Half: 4.25in x 6.5in Front Cover Design (Narrow Margins) */
+    .front-cover-half {
+      width: 4.25in;
+      height: 6.5in;
+      padding: 0.14in 0.15in 0.14in 0.24in;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 52% 42%, #FFFDF9 0%, #F5ECDC 68%, #E5D2B2 100%);
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Bookbinding Spine Strip along the Center Fold Edge */
+    .binding-spine-strip {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0.13in;
+      background: linear-gradient(90deg, #06132A 0%, #0E2B5C 72%, #C59B27 90%, #8A650E 100%);
+      z-index: 4;
+    }
+
+    .binding-spine-strip::after {
+      content: "";
+      position: absolute;
+      top: 0.25in;
+      bottom: 0.25in;
+      left: 0.05in;
+      width: 1.5px;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(229, 193, 88, 0.75) 0px,
+        rgba(229, 193, 88, 0.75) 8px,
+        transparent 8px,
+        transparent 16px
+      );
+    }
+
+    .cover-frame-outer {
+      width: 100%;
+      height: 100%;
+      border: 2.2px solid var(--navy-royal);
+      padding: 0.05in;
+      position: relative;
+      display: flex;
+    }
+
+    .cover-frame-inner {
+      width: 100%;
+      height: 100%;
+      border: 1.6px solid var(--gold-rich);
+      outline: 1px solid rgba(14, 43, 92, 0.3);
+      outline-offset: -0.07in;
+      padding: 0.14in 0.16in 0.12in;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .corner {
+      position: absolute;
+      width: 0.48in;
+      height: 0.48in;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .corner svg { width: 100%; height: 100%; }
+    .corner.tl { top: 0.02in; left: 0.02in; }
+    .corner.tr { top: 0.02in; right: 0.02in; transform: scaleX(-1); }
+    .corner.bl { bottom: 0.02in; left: 0.02in; transform: scaleY(-1); }
+    .corner.br { bottom: 0.02in; right: 0.02in; transform: scale(-1, -1); }
+
+    .cover-watermark {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2.5in;
+      height: 2.5in;
+      opacity: 0.045;
+      pointer-events: none;
+      object-fit: contain;
+    }
+
+    /* Header Logos & Institutional Title */
+    .nb-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .nb-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .nb-logos img.seal {
+      width: 0.44in;
+      height: 0.44in;
+      object-fit: contain;
+    }
+
+    .nb-logos img.bagong {
+      width: 0.46in;
+      height: 0.46in;
+      object-fit: contain;
+    }
+
+    .nb-gov-line {
+      font-family: var(--font-serif);
+      font-size: 6.2pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-body);
+      margin-top: 1px;
+    }
+
+    .nb-lib-line {
+      font-family: var(--font-display);
+      font-size: 8.8pt;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--blue-cerulean);
+    }
+
+    /* Field Manual Badge & Workshop Title */
+    .nb-title-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .nb-kicker-pill {
+      background: var(--navy-deep);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-rich);
+      font-family: var(--font-display);
+      font-size: 5.8pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 2.5px 10px;
+      border-radius: 999px;
+      margin-bottom: 5px;
+    }
+
+    .nb-main-title {
+      font-family: var(--font-display);
+      font-size: 11.4pt;
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: 0.03em;
+      color: var(--navy-deep);
+      text-transform: uppercase;
+    }
+
+    .nb-main-title span.gold-sub {
+      color: #8A5E06;
+      display: block;
+      margin-top: 1.5px;
+    }
+
+    .nb-date-venue {
+      margin-top: 5px;
+      font-family: var(--font-sans);
+      font-size: 6.5pt;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--navy-royal);
+      background: rgba(197, 155, 39, 0.2);
+      border: 1px solid rgba(197, 155, 39, 0.55);
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    /* Center Archival Emblem */
+    .nb-emblem-wrap {
+      z-index: 2;
+    }
+
+    /* Ex Libris / Owner Bookplate Box */
+    .ex-libris-box {
+      width: 94%;
+      background: rgba(255, 253, 249, 0.94);
+      border: 1.4px solid var(--navy-royal);
+      outline: 1px solid var(--gold-rich);
+      outline-offset: -3px;
+      border-radius: 5px;
+      padding: 7px 12px 9px;
+      text-align: left;
+      z-index: 2;
+      box-shadow: 0 3px 8px rgba(7, 23, 51, 0.08);
+    }
+
+    .ex-libris-header {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 6pt;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 5px;
+    }
+
+    .ex-field-row {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin-top: 5px;
+      font-family: var(--font-serif);
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: var(--navy-deep);
+    }
+
+    .ex-field-row .line {
+      flex: 1;
+      border-bottom: 1px solid var(--navy-royal);
+      height: 11px;
+    }
+
+    /* Footer Credits */
+    .nb-footer-credits {
+      width: 86%;
+      border-top: 1px solid rgba(197, 155, 39, 0.65);
+      padding-top: 4px;
+      padding-bottom: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 5.5pt;
+      z-index: 2;
+    }
+
+    .nb-speakers-row {
+      font-family: var(--font-sans);
+      color: var(--ink-body);
+      line-height: 1.3;
+    }
+
+    .nb-speakers-row strong {
+      color: var(--navy-deep);
+      font-family: var(--font-display);
+      letter-spacing: 0.02em;
+    }
+
+    .nb-officials-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-sans);
+      font-size: 5.3pt;
+      color: var(--ink-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>5. DIY Notebook Cover (8.5" × 13" Cut Crosswise &amp; Folded)</h1>
+      <span class="spec-badge">Cut Crosswise (8.5"×6.5") • Left Half Blank • Middle Fold • Right Half Cover (4.25"×6.5")</span>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn-gold" onclick="window.print()">🖨️ Print / Save PDF (8.5" × 13")</button>
+    </div>
+  </div>
+
+  <section class="longbond-portrait-sheet print-page" id="notebook-2up-sheet">
+    <div class="crosswise-cut-line"></div>
+    <div class="cut-label-left">✂️ CUT CROSSWISE HERE (AT 6.5 IN)</div>
+
+    <!-- Top Crosswise Half (8.5" x 6.5") -->
+    <div id="spread-top-slot"></div>
+
+    <!-- Bottom Crosswise Half (8.5" x 6.5") -->
+    <div id="spread-bottom-slot"></div>
+  </section>
+
+  <script>
+    function buildFoldedSpreadHTML(spreadId, coverId) {
+      return `
+        <div class="crosswise-half-spread" id="${spreadId}">
+          <div class="center-fold-line"></div>
+          <div class="fold-badge">⇣ FOLD IN MIDDLE (4.25 IN) ⇣</div>
+
+          <!-- Left Half (4.25" x 6.5"): Blank Back Cover -->
+          <div class="blank-back-half">
+            <div class="screen-only-blank-hint">
+              <strong>BACK COVER (BLANK)</strong><br />
+              4.25" × 6.5"<br />
+              <span style="font-size:7.5pt;">(Prints completely blank)</span>
+            </div>
+          </div>
+
+          <!-- Right Half (4.25" x 6.5"): Front Cover Design -->
+          <div class="front-cover-half" id="${coverId}">
+            <div class="binding-spine-strip"></div>
+            <div class="cover-frame-outer">
+              <div class="cover-frame-inner">
+                <div class="corner tl">${PPCLOrnaments.cornerFiligree(46)}</div>
+                <div class="corner tr">${PPCLOrnaments.cornerFiligree(46)}</div>
+                <div class="corner bl">${PPCLOrnaments.cornerFiligree(46)}</div>
+                <div class="corner br">${PPCLOrnaments.cornerFiligree(46)}</div>
+
+                <img class="cover-watermark" src="logo/ppcitylibrary-logo.png" alt="" />
+
+                <!-- Header Logos -->
+                <header class="nb-header">
+                  <div class="nb-logos">
+                    <img class="seal" src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+                    <img class="seal" src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+                    <img class="bagong" src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
+                  </div>
+                  <div class="nb-gov-line">Republic of the Philippines • City of Puerto Princesa</div>
+                  <div class="nb-lib-line">PUERTO PRINCESA CITY LIBRARY</div>
+                </header>
+
+                <!-- Workshop Title -->
+                <div class="nb-title-zone">
+                  <div class="nb-kicker-pill" contenteditable="true">Conservation Field Notebook</div>
+                  <h2 class="nb-main-title" contenteditable="true">
+                    Training-Workshop on Basic Preservation
+                    <span class="gold-sub">&amp; Conservation of Paper-Based Collections</span>
+                  </h2>
+                  <div class="nb-date-venue" contenteditable="true">
+                    NOVEMBER 4–6, 2026 • PUERTO PRINCESA CITY LIBRARY
+                  </div>
+                </div>
+
+                <!-- Center Archival Crest -->
+                <div class="nb-emblem-wrap">
+                  ${PPCLOrnaments.conservationCrest(94)}
+                </div>
+
+                <!-- Ex Libris / Participant Nameplate Box -->
+                <div class="ex-libris-box">
+                  <div class="ex-libris-header" contenteditable="true">✦ Ex Libris • Participant’s Notes ✦</div>
+                  <div class="ex-field-row">
+                    <span>Name:</span>
+                    <div class="line" contenteditable="true"></div>
+                  </div>
+                  <div class="ex-field-row">
+                    <span>Office / Unit:</span>
+                    <div class="line" contenteditable="true"></div>
+                  </div>
+                </div>
+
+                <!-- Footer Credits -->
+                <footer class="nb-footer-credits">
+                  <div class="nb-speakers-row" contenteditable="true">
+                    <span style="text-transform:uppercase; font-size:5pt; letter-spacing:0.1em; color:var(--gold-dark); font-weight:800;">Resource Speakers:</span><br />
+                    <strong>ALEXANDER O. VETUS</strong> •
+                    <strong>GENKIE R. ALBANO</strong> •
+                    <strong>GERALDINE S. FRANCIA</strong>
+                  </div>
+                  <div class="nb-officials-row" contenteditable="true">
+                    <span><strong>Moderator:</strong> Don Angel Lou M. Salvatierra</span>
+                    <span><strong>City Librarian:</strong> Joymarie B. Olape, RL</span>
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('spread-top-slot').outerHTML = buildFoldedSpreadHTML('notebook-spread-top', 'notebook-cover-top');
+    document.getElementById('spread-bottom-slot').outerHTML = buildFoldedSpreadHTML('notebook-spread-bottom', 'notebook-cover-bottom');
+  </script>
+</body>
+</html>

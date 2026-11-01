@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate of Appreciation — Speakers & Moderator (A4 Landscape)</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <script src="shared/ornaments.js"></script>
+  <style>
+    @page {
+      size: 297mm 210mm;
+      margin: 0;
+    }
+
+    .cert-page {
+      width: 297mm;
+      height: 210mm;
+      position: relative;
+      overflow: hidden;
+      /* Narrowed outer margin so no space is wasted */
+      padding: 3.5mm 4mm;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      background-color: var(--parchment-bg);
+    }
+
+    /* Outer Navy & Gold Frame */
+    .cert-frame-outer {
+      width: 100%;
+      height: 100%;
+      border: 3.5px solid var(--navy-royal);
+      padding: 2mm;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255, 253, 248, 0.96) 0%, rgba(244, 235, 220, 0.88) 68%, rgba(226, 208, 174, 0.94) 100%);
+      display: flex;
+    }
+
+    /* Inner Double Gold Guilloche Border */
+    .cert-frame-inner {
+      width: 100%;
+      height: 100%;
+      border: 2.2px solid var(--gold-rich);
+      outline: 1.2px solid rgba(14, 43, 92, 0.4);
+      outline-offset: -3.2mm;
+      padding: 5.5mm 11mm 5mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* Subtle Center Watermark */
+    .watermark-seal {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 132mm;
+      height: 132mm;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 0;
+      object-fit: contain;
+    }
+
+    /* Decorative Side Ribbon Accents */
+    .side-accent-left,
+    .side-accent-right {
+      position: absolute;
+      top: 16mm;
+      bottom: 16mm;
+      width: 3mm;
+      background: linear-gradient(180deg, var(--navy-royal) 0%, var(--gold-rich) 50%, var(--navy-royal) 100%);
+      opacity: 0.9;
+    }
+    .side-accent-left { left: 0; }
+    .side-accent-right { right: 0; }
+
+    /* 4 Corner Filigrees */
+    .corner {
+      position: absolute;
+      width: 24mm;
+      height: 24mm;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .corner svg { width: 100%; height: 100%; }
+    .corner.tl { top: 1mm; left: 1mm; }
+    .corner.tr { top: 1mm; right: 1mm; transform: scaleX(-1); }
+    .corner.bl { bottom: 1mm; left: 1mm; transform: scaleY(-1); }
+    .corner.br { bottom: 1mm; right: 1mm; transform: scale(-1, -1); }
+
+    /* Header Section */
+    .cert-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cert-header .logo-seal {
+      width: 22.5mm;
+      height: 22.5mm;
+      object-fit: contain;
+    }
+
+    .cert-header .logo-bagong {
+      width: 23.5mm;
+      height: 23.5mm;
+      object-fit: contain;
+    }
+
+    .header-gov-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.22;
+      padding: 0 10px;
+    }
+
+    .header-gov-text .rep {
+      font-family: var(--font-serif);
+      font-size: 11.5pt;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-body);
+    }
+
+    .header-gov-text .city {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--navy-royal);
+    }
+
+    .header-gov-text .lib {
+      font-family: var(--font-display);
+      font-size: 15.5pt;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--blue-cerulean);
+      margin-top: 1px;
+    }
+
+    /* Main Title Block */
+    .cert-title-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .cert-title-main {
+      font-family: var(--font-display);
+      font-size: 35pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy-deep);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+      line-height: 1.04;
+    }
+
+    .cert-subtitle-pill {
+      margin-top: 1.5mm;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15pt;
+      font-weight: 600;
+      color: var(--gold-dark);
+      letter-spacing: 0.04em;
+    }
+
+    /* Recipient Name */
+    .recipient-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      width: 92%;
+    }
+
+    .recipient-name {
+      font-family: var(--font-display);
+      font-size: 31pt;
+      font-weight: 800;
+      color: var(--navy-royal);
+      letter-spacing: 0.05em;
+      padding: 0 22px 3px;
+      border-bottom: 2.4px solid var(--gold-rich);
+      min-width: 170mm;
+      line-height: 1.12;
+    }
+
+    /* Citation Body */
+    .citation-body {
+      max-width: 248mm;
+      font-family: var(--font-serif);
+      font-size: 15pt;
+      line-height: 1.46;
+      color: var(--ink-dark);
+      z-index: 2;
+    }
+
+    .citation-body .role-highlight {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13.8pt;
+      color: var(--navy-royal);
+      letter-spacing: 0.05em;
+      background: rgba(197, 155, 39, 0.18);
+      padding: 1px 10px;
+      border-radius: 4px;
+    }
+
+    .citation-body .workshop-title {
+      font-weight: 700;
+      font-style: italic;
+      color: var(--navy-deep);
+      font-size: 16.5pt;
+      display: inline-block;
+      margin-top: 1mm;
+    }
+
+    .citation-given {
+      margin-top: 2.5mm;
+      font-family: var(--font-serif);
+      font-size: 13.8pt;
+      font-style: italic;
+      color: var(--ink-body);
+    }
+
+    /* Footer & Signatory Section */
+    .cert-footer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      padding: 0 6mm;
+      z-index: 2;
+    }
+
+    .cert-meta-left {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 9.2pt;
+      color: var(--ink-muted);
+      line-height: 1.45;
+      border-left: 3px solid var(--gold-rich);
+      padding-left: 10px;
+    }
+
+    .signatory-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 95mm;
+    }
+
+    .sig-line {
+      width: 86mm;
+      border-bottom: 2px solid var(--navy-deep);
+      margin-bottom: 4px;
+      height: 12mm;
+    }
+
+    .sig-name {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--navy-deep);
+    }
+
+    .sig-title {
+      font-family: var(--font-sans);
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--blue-cerulean);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .sig-office {
+      font-family: var(--font-serif);
+      font-size: 10.5pt;
+      font-style: italic;
+      color: var(--ink-muted);
+    }
+
+    .seal-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>1. Certificate for Speakers &amp; Moderator</h1>
+      <span class="spec-badge">A4 Landscape • Narrow Margins • 4 Pages</span>
+    </div>
+    <div class="toolbar-actions">
+      <span style="font-size:12px; opacity:0.85;">Tip: Click any name or text to edit live</span>
+      <button class="btn-gold" onclick="window.print()">🖨️ Print / Save PDF (A4)</button>
+    </div>
+  </div>
+
+  <div id="certificates-container" style="display:flex; flex-direction:column; gap:32px;"></div>
+
+  <script>
+    const recipients = [
+      {
+        id: 'speaker-1',
+        name: 'ALEXANDER O. VETUS',
+        role: 'RESOURCE SPEAKER',
+        citation: 'for generously sharing invaluable expertise, specialized knowledge, and practical methodologies in archival preservation during the three-day'
+      },
+      {
+        id: 'speaker-2',
+        name: 'GENKIE R. ALBANO',
+        role: 'RESOURCE SPEAKER',
+        citation: 'for generously sharing invaluable expertise, specialized knowledge, and practical methodologies in archival preservation during the three-day'
+      },
+      {
+        id: 'speaker-3',
+        name: 'GERALDINE S. FRANCIA',
+        role: 'RESOURCE SPEAKER',
+        citation: 'for generously sharing invaluable expertise, specialized knowledge, and practical methodologies in archival preservation during the three-day'
+      },
+      {
+        id: 'moderator-1',
+        name: 'DON ANGEL LOU M. SALVATIERRA',
+        role: 'MODERATOR / FACILITATOR',
+        citation: 'for exemplary leadership, dynamic facilitation, and steadfast commitment to guiding productive discourse and hands-on sessions during the three-day'
+      }
+    ];
+
+    const container = document.getElementById('certificates-container');
+
+    recipients.forEach((rec, idx) => {
+      const page = document.createElement('section');
+      page.className = 'cert-page print-page';
+      page.id = rec.id;
+      page.innerHTML = `
+        <div class="cert-frame-outer">
+          <div class="side-accent-left"></div>
+          <div class="side-accent-right"></div>
+
+          <div class="cert-frame-inner">
+            <div class="corner tl">${PPCLOrnaments.cornerFiligree(90)}</div>
+            <div class="corner tr">${PPCLOrnaments.cornerFiligree(90)}</div>
+            <div class="corner bl">${PPCLOrnaments.cornerFiligree(90)}</div>
+            <div class="corner br">${PPCLOrnaments.cornerFiligree(90)}</div>
+
+            <img class="watermark-seal" src="logo/ppcitylibrary-logo.png" alt="" />
+
+            <header class="cert-header">
+              <img class="logo-seal" src="logo/Puerto_Princesa_city_seal.svg.png" alt="Puerto Princesa City Seal" />
+              <img class="logo-seal" src="logo/ppcitylibrary-logo.png" alt="Puerto Princesa City Library Logo" />
+              <div class="header-gov-text">
+                <span class="rep">Republic of the Philippines</span>
+                <span class="city">City Government of Puerto Princesa</span>
+                <span class="lib">Puerto Princesa City Library</span>
+              </div>
+              <img class="logo-bagong" src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas Logo" />
+            </header>
+
+            <div class="cert-title-block">
+              <h2 class="cert-title-main" contenteditable="true">Certificate of Appreciation</h2>
+              <div style="margin-top:2px;">${PPCLOrnaments.dividerWithBook(360)}</div>
+              <p class="cert-subtitle-pill" contenteditable="true">This Certificate of Appreciation is proudly presented to</p>
+            </div>
+
+            <div class="recipient-block">
+              <div class="recipient-name" contenteditable="true">${rec.name}</div>
+            </div>
+
+            <div class="citation-body" contenteditable="true">
+              in grateful recognition of distinguished service as <span class="role-highlight">${rec.role}</span>,
+              ${rec.citation}
+              <br />
+              <span class="workshop-title">“Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections”</span>
+              <div class="citation-given">
+                Given this <strong>6th day of November 2026</strong> at the <strong>Puerto Princesa City Library</strong>,
+                Puerto Princesa City, Palawan, Philippines.
+              </div>
+            </div>
+
+            <footer class="cert-footer">
+              <div class="cert-meta-left" contenteditable="true">
+                <strong>TRAINING-WORKSHOP SERIES 2026</strong><br />
+                Date: November 4–6, 2026<br />
+                Venue: Puerto Princesa City Library<br />
+                Cert. Ref: PPCL-2026-SPK-0${idx + 1}
+              </div>
+
+              <div class="signatory-center">
+                <div class="sig-line"></div>
+                <div class="sig-name" contenteditable="true">JOYMARIE B. OLAPE, RL</div>
+                <div class="sig-title" contenteditable="true">City Librarian</div>
+                <div class="sig-office" contenteditable="true">Puerto Princesa City Library</div>
+              </div>
+
+              <div class="seal-right">
+                ${PPCLOrnaments.goldSealBadge(102)}
+              </div>
+            </footer>
+          </div>
+        </div>
+      `;
+      container.appendChild(page);
+    });
+  </script>
+</body>
+</html>
