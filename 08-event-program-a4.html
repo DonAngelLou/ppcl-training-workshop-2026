@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Program &amp; Schedule — PPCL Training-Workshop (A4 Back-to-Back)</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <style>
+    @page {
+      size: 210mm 297mm;
+      margin: 0;
+    }
+
+    body {
+      background-color: #1A2232;
+      color: var(--ink-dark);
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 80px;
+      gap: 36px;
+    }
+
+    /* Standard A4 Sheet: 210mm x 297mm */
+    .a4-program-page {
+      width: 210mm;
+      height: 297mm;
+      position: relative;
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      page-break-after: always;
+      break-after: page;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .a4-program-page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    /* ========================================================
+       PAGE 1: COVER DESIGN (Monumental Archival Presentation)
+       ======================================================== */
+    .cover-page {
+      background-color: #06152D;
+      color: #FFFFFF;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16mm 18mm 14mm;
+    }
+
+    .cover-backdrop-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+    }
+
+    .cover-editorial-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 42%, rgba(5, 17, 38, 0.84) 0%, rgba(5, 17, 38, 0.56) 65%, rgba(4, 12, 28, 0.28) 100%),
+        linear-gradient(180deg, rgba(4, 14, 32, 0.76) 0%, rgba(6, 20, 45, 0.16) 24%, rgba(6, 20, 45, 0.26) 64%, rgba(4, 12, 28, 0.92) 100%);
+      z-index: 1;
+    }
+
+    .cover-architectural-border {
+      position: absolute;
+      inset: 7mm;
+      border: 1.5px solid rgba(229, 193, 88, 0.5);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .cover-architectural-border::before {
+      content: "";
+      position: absolute;
+      inset: 2.5mm;
+      border: 2px solid rgba(229, 193, 88, 0.85);
+      box-shadow: inset 0 0 16px rgba(229, 193, 88, 0.08);
+    }
+
+    .cover-architectural-border::after {
+      content: "";
+      position: absolute;
+      inset: 5mm;
+      border: 1px dashed rgba(229, 193, 88, 0.35);
+    }
+
+    .cover-corner {
+      position: absolute;
+      width: 22mm;
+      height: 22mm;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .cover-corner svg { width: 100%; height: 100%; }
+    .cc-tl { top: 7.5mm; left: 7.5mm; }
+    .cc-tr { top: 7.5mm; right: 7.5mm; transform: scaleX(-1); }
+    .cc-bl { bottom: 7.5mm; left: 7.5mm; transform: scaleY(-1); }
+    .cc-br { bottom: 7.5mm; right: 7.5mm; transform: scale(-1, -1); }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cover-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3mm;
+      padding-bottom: 4mm;
+      border-bottom: 1px solid rgba(229, 193, 88, 0.4);
+      width: 100%;
+    }
+
+    .cover-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5mm;
+    }
+
+    .cover-logo-circle {
+      width: 17mm;
+      height: 17mm;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 1.2mm;
+      border: 1.6px solid var(--gold-rich);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cover-logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .cover-agency-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8mm;
+    }
+
+    .cover-agency-text .rep {
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .cover-agency-text .lgu {
+      font-family: var(--font-serif);
+      font-size: 11.5pt;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F8FAFC;
+    }
+
+    .cover-agency-text .lib {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .cover-center-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto 0;
+      gap: 2.5mm;
+      max-width: 165mm;
+    }
+
+    .cover-badge-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 3mm;
+      background: rgba(229, 193, 88, 0.14);
+      border: 1px solid rgba(229, 193, 88, 0.45);
+      padding: 1.4mm 5mm;
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .cover-title-1 {
+      font-family: var(--font-display);
+      font-size: 27pt;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.08;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+      margin-top: 1mm;
+    }
+
+    .cover-title-bridge {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15pt;
+      font-weight: 600;
+      color: #F3E3B2;
+      letter-spacing: 0.02em;
+      margin: 1mm 0;
+    }
+
+    .cover-title-2 {
+      font-family: var(--font-display);
+      font-size: 25pt;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFF8DB 0%, #E8C35A 52%, #C59620 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.55));
+    }
+
+    .cover-divider {
+      margin: 2mm 0;
+      opacity: 0.95;
+    }
+
+    /* 3 Core Topics Pill Showcase on Cover */
+    .cover-topics-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3mm;
+      width: 100%;
+      margin-top: 2mm;
+    }
+
+    .cover-topic-chip {
+      background: rgba(14, 38, 77, 0.55);
+      border: 1px solid rgba(229, 193, 88, 0.4);
+      border-top: 2px solid var(--gold-bright);
+      border-radius: 4px;
+      padding: 2.2mm 2.5mm;
+      text-align: center;
+    }
+
+    .cover-topic-chip .num {
+      font-family: var(--font-sans);
+      font-size: 6.8pt;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      display: block;
+    }
+
+    .cover-topic-chip .name {
+      font-family: var(--font-display);
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-top: 0.8mm;
+    }
+
+    /* Date & Venue Pedestal */
+    .cover-meta-pedestal {
+      margin-top: 4mm;
+      display: inline-flex;
+      align-items: center;
+      gap: 5mm;
+      background: rgba(6, 20, 45, 0.8);
+      border: 1.4px solid rgba(229, 193, 88, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 2.8mm 7mm;
+      border-radius: 6px;
+    }
+
+    .cover-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6mm;
+    }
+
+    .cover-meta-item .lbl {
+      font-family: var(--font-sans);
+      font-size: 6.8pt;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .cover-meta-item .val {
+      font-family: var(--font-sans);
+      font-size: 10.5pt;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .cover-meta-sep {
+      width: 1px;
+      height: 8mm;
+      background: rgba(229, 193, 88, 0.5);
+    }
+
+    .cover-footer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2mm;
+      padding-top: 3.5mm;
+      border-top: 1px solid rgba(229, 193, 88, 0.4);
+    }
+
+    .cover-program-guide-badge {
+      font-family: var(--font-display);
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .cover-motto {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 8.5pt;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.05em;
+    }
+
+    /* ========================================================
+       INSIDE PAGES: DAYS 1, 2, 3 (Parchment Archival Styling)
+       ======================================================== */
+    .inside-page {
+      background-color: var(--parchment-bg);
+      background-image:
+        radial-gradient(ellipse at 50% 30%, rgba(255, 253, 248, 0.88) 0%, rgba(244, 235, 220, 0.55) 65%, rgba(228, 212, 184, 0.65) 100%),
+        repeating-linear-gradient(0deg, rgba(138, 101, 14, 0.015) 0px, rgba(138, 101, 14, 0.015) 1px, transparent 1px, transparent 3px);
+      padding: 12mm 14mm 10mm;
+      justify-content: space-between;
+    }
+
+    /* Double Neoclassical Border for Inside Pages */
+    .inside-frame {
+      position: absolute;
+      inset: 6mm;
+      border: 1.8px solid var(--navy-royal);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .inside-frame::after {
+      content: "";
+      position: absolute;
+      inset: 2mm;
+      border: 1px solid var(--gold-rich);
+    }
+
+    .inside-corner {
+      position: absolute;
+      width: 14mm;
+      height: 14mm;
+      z-index: 11;
+      pointer-events: none;
+    }
+    .inside-corner svg { width: 100%; height: 100%; }
+    .ic-tl { top: 6.5mm; left: 6.5mm; }
+    .ic-tr { top: 6.5mm; right: 6.5mm; transform: scaleX(-1); }
+    .ic-bl { bottom: 6.5mm; left: 6.5mm; transform: scaleY(-1); }
+    .ic-br { bottom: 6.5mm; right: 6.5mm; transform: scale(-1, -1); }
+
+    .inside-container {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top Running Header */
+    .running-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.2px solid var(--gold-rich);
+      padding-bottom: 2mm;
+    }
+
+    .rh-left {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .rh-left img {
+      width: 8.5mm;
+      height: 8.5mm;
+      object-fit: contain;
+    }
+
+    .rh-titles {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .rh-titles .dept {
+      font-family: var(--font-sans);
+      font-size: 6.2pt;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--navy-mid);
+    }
+
+    .rh-titles .event {
+      font-family: var(--font-display);
+      font-size: 7.8pt;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--navy-royal);
+    }
+
+    .rh-right {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      font-family: var(--font-sans);
+      font-size: 7pt;
+      font-weight: 700;
+      color: var(--navy-deep);
+      background: rgba(229, 193, 88, 0.22);
+      border: 1px solid var(--gold-rich);
+      padding: 1mm 3mm;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Page-Specific Hero / Day Banner */
+    .day-banner {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-royal) 100%);
+      color: #FFFFFF;
+      border-top: 2px solid var(--gold-rich);
+      border-bottom: 2px solid var(--gold-rich);
+      border-radius: 4px;
+      padding: 2.8mm 5mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 2.5mm 0 3mm;
+      box-shadow: 0 4px 12px rgba(7, 23, 51, 0.15);
+    }
+
+    .day-banner-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4mm;
+    }
+
+    .day-banner-badge {
+      font-family: var(--font-sans);
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .day-banner-title {
+      font-family: var(--font-display);
+      font-size: 13.5pt;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+    }
+
+    .day-banner-date {
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      text-align: right;
+    }
+
+    /* First Page (Day 1) Executive Header Lockup with Speakers */
+    .page1-intro-panel {
+      background: #FFFFFF;
+      border: 1.2px solid rgba(197, 155, 39, 0.45);
+      border-left: 4px solid var(--gold-rich);
+      border-radius: 4px;
+      padding: 2.8mm 4mm;
+      margin-bottom: 3mm;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+    }
+
+    .page1-intro-title {
+      font-family: var(--font-display);
+      font-size: 11pt;
+      font-weight: 800;
+      color: var(--navy-royal);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+
+    .page1-intro-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4mm;
+      font-size: 7.2pt;
+      color: var(--ink-body);
+      border-bottom: 1px dashed rgba(197, 155, 39, 0.4);
+      padding-bottom: 1.8mm;
+    }
+
+    .page1-intro-meta strong {
+      color: var(--navy-deep);
+    }
+
+    /* 5-Column Dignitary Grid on Page 1 */
+    .page1-roster-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2mm;
+    }
+
+    .roster-card-mini {
+      background: rgba(244, 235, 220, 0.5);
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 3px;
+      padding: 1.6mm 2mm;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .roster-card-mini .role {
+      font-family: var(--font-sans);
+      font-size: 5.8pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.4mm;
+    }
+
+    .roster-card-mini.official .role {
+      color: var(--blue-cerulean);
+    }
+
+    .roster-card-mini .name {
+      font-family: var(--font-display);
+      font-size: 6.8pt;
+      font-weight: 800;
+      color: var(--navy-deep);
+      line-height: 1.15;
+    }
+
+    /* Timetable Table Schedule Layout */
+    .schedule-table {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2mm;
+      flex: 1;
+    }
+
+    .schedule-item {
+      display: grid;
+      grid-template-columns: 28mm 1fr;
+      gap: 3mm;
+      background: #FFFFFF;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 4px;
+      padding: 2.2mm 3.2mm;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(7, 23, 51, 0.03);
+    }
+
+    .schedule-item.break {
+      background: rgba(243, 227, 178, 0.32);
+      border-left: 3.5px solid var(--gold-rich);
+    }
+
+    .schedule-item.highlight {
+      background: rgba(224, 242, 254, 0.45);
+      border-left: 3.5px solid var(--blue-cerulean);
+    }
+
+    .schedule-time-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy-royal);
+      color: #FFFFFF;
+      border-radius: 3px;
+      padding: 1.4mm 1mm;
+      text-align: center;
+    }
+
+    .schedule-item.break .schedule-time-box {
+      background: var(--gold-dark);
+    }
+
+    .schedule-time-text {
+      font-family: var(--font-sans);
+      font-size: 6.8pt;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .schedule-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4mm;
+    }
+
+    .schedule-activity {
+      font-family: var(--font-display);
+      font-size: 8.8pt;
+      font-weight: 700;
+      color: var(--navy-deep);
+      line-height: 1.2;
+    }
+
+    .schedule-notes {
+      font-family: var(--font-sans);
+      font-size: 6.8pt;
+      color: var(--ink-muted);
+      line-height: 1.3;
+    }
+
+    /* Page 3 Committees & Signatures Box */
+    .closing-endorsement-box {
+      margin-top: 3mm;
+      background: #FFFFFF;
+      border: 1.2px solid rgba(197, 155, 39, 0.5);
+      border-radius: 4px;
+      padding: 2.8mm 4mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4mm;
+      align-items: center;
+    }
+
+    .ce-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8mm;
+    }
+
+    .ce-kicker {
+      font-family: var(--font-sans);
+      font-size: 6.2pt;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+    }
+
+    .ce-librarian {
+      font-family: var(--font-display);
+      font-size: 9pt;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .ce-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 7.2pt;
+      color: var(--ink-body);
+    }
+
+    .ce-right {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+
+    /* Running Footer on Inside Pages */
+    .running-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1.2px solid var(--gold-rich);
+      padding-top: 2mm;
+      margin-top: 2mm;
+      font-family: var(--font-sans);
+      font-size: 6.8pt;
+      color: var(--ink-muted);
+    }
+
+    .running-footer .pg-num {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 8pt;
+      color: var(--navy-royal);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Studio Toolbar -->
+  <div class="studio-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="back-link">← Studio Hub</a>
+      <h1>8. Official Event Program &amp; Schedule (A4 Back-to-Back)</h1>
+      <span class="spec-badge">4-Page Complete Program • Cover + Days 1, 2, 3 • A4 Duplex</span>
+    </div>
+    <div class="toolbar-actions">
+      <a href="exports/pdf/08-event-program-a4.pdf" class="btn-gold" target="_blank" download="PPCL-Event-Program-A4.pdf">📄 Download Print PDF</a>
+      <a href="exports/png/08-event-program-cover.png" class="btn-outline" target="_blank" download="PPCL-Program-Cover.png">🖼️ Cover PNG</a>
+      <a href="exports/png/08-event-program-day1.png" class="btn-outline" target="_blank" download="PPCL-Program-Day1.png">🖼️ Day 1 PNG</a>
+      <button class="btn-gold" onclick="window.print()">🖨️ Print All 4 Pages</button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE 1: FRONT COVER (A4 Portrait, 210mm x 297mm)
+       ======================================================== -->
+  <section class="a4-program-page cover-page print-page" id="program-page-cover">
+    <img class="cover-backdrop-img" src="shared/bg_archival_tarp.jpg" alt="Archival Backdrop" />
+    <div class="cover-editorial-scrim"></div>
+    <div class="cover-architectural-border"></div>
+
+    <!-- 4 Corner Filigrees -->
+    <div class="cover-corner cc-tl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="cover-corner cc-tr">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="cover-corner cc-bl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="cover-corner cc-br">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+      </svg>
+    </div>
+
+    <div class="cover-content">
+      <!-- 1. Header -->
+      <header class="cover-header">
+        <div class="cover-logos">
+          <div class="cover-logo-circle">
+            <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+          </div>
+          <div class="cover-logo-circle">
+            <img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+          </div>
+          <div class="cover-logo-circle">
+            <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
+          </div>
+        </div>
+
+        <div class="cover-agency-text">
+          <span class="rep" contenteditable="true">Republic of the Philippines</span>
+          <span class="lgu" contenteditable="true">City Government of Puerto Princesa</span>
+          <span class="lib" contenteditable="true">Puerto Princesa City Library</span>
+        </div>
+      </header>
+
+      <!-- 2. Monumental Central Stage -->
+      <div class="cover-center-stage">
+        <div class="cover-badge-kicker">
+          <span>✦</span>
+          <span contenteditable="true">Official Event Program &amp; Schedule</span>
+          <span>✦</span>
+        </div>
+
+        <h1 class="cover-title-1" contenteditable="true">Training-Workshop</h1>
+        <div class="cover-title-bridge" contenteditable="true">on Basic Preservation and Conservation of</div>
+        <h2 class="cover-title-2" contenteditable="true">Paper-Based Collections</h2>
+
+        <!-- Archival Vector Tome Divider -->
+        <div class="cover-divider">
+          <svg width="280" height="20" viewBox="0 0 340 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="6" y1="12" x2="132" y2="12" stroke="#E5C158" stroke-width="1.8"/>
+            <polygon points="138,12 144,7 150,12 144,17" fill="#E5C158"/>
+            <path d="M170 5.5C164.5 5.5 159.5 7 157.5 9V19C159.5 17 164.5 15.5 170 15.5C175.5 15.5 180.5 17 182.5 19V9C180.5 7 175.5 5.5 170 5.5Z" stroke="#E5C158" stroke-width="2" fill="none"/>
+            <line x1="170" y1="6" x2="170" y2="16" stroke="#E5C158" stroke-width="1.8"/>
+            <polygon points="190,12 196,7 202,12 196,17" fill="#E5C158"/>
+            <line x1="208" y1="12" x2="334" y2="12" stroke="#E5C158" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <!-- 3 Core Workshop Topics -->
+        <div class="cover-topics-strip">
+          <div class="cover-topic-chip">
+            <span class="num">Topic 01</span>
+            <span class="name">Book Binding</span>
+          </div>
+          <div class="cover-topic-chip">
+            <span class="num">Topic 02</span>
+            <span class="name">Book Enclosure</span>
+          </div>
+          <div class="cover-topic-chip">
+            <span class="num">Topic 03</span>
+            <span class="name">Newspaper Binding</span>
+          </div>
+        </div>
+
+        <!-- Date & Venue Pedestal -->
+        <div class="cover-meta-pedestal">
+          <div class="cover-meta-item">
+            <span class="lbl">Dates of Conduct</span>
+            <span class="val" contenteditable="true">November 4–6, 2026</span>
+          </div>
+          <div class="cover-meta-sep"></div>
+          <div class="cover-meta-item">
+            <span class="lbl">Official Venue</span>
+            <span class="val" contenteditable="true">Puerto Princesa City Library</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Cover Footer -->
+      <footer class="cover-footer">
+        <span class="cover-program-guide-badge" contenteditable="true">Comprehensive 3-Day Activity Flow</span>
+        <span class="cover-motto" contenteditable="true">✦ Safeguarding Historical Records • Preserving Cultural Heritage • Empowering Library Stewards ✦</span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 2: INSIDE PAGE 1 (Title, Subtitle, Date, Speakers & Day 1)
+       ======================================================== -->
+  <section class="a4-program-page inside-page print-page" id="program-page-day1">
+    <div class="inside-frame"></div>
+    <!-- Inside Corner Ornaments -->
+    <div class="inside-corner ic-tl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-tr">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-bl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-br">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+
+    <div class="inside-container">
+      <!-- Running Header -->
+      <header class="running-header">
+        <div class="rh-left">
+          <img src="logo/ppcitylibrary-logo.png" alt="PPCL" />
+          <div class="rh-titles">
+            <span class="dept">Puerto Princesa City Library • Training-Workshop</span>
+            <span class="event">Preservation &amp; Conservation of Paper-Based Collections</span>
+          </div>
+        </div>
+        <div class="rh-right">
+          <span>Official Program</span>
+        </div>
+      </header>
+
+      <!-- Executive Intro & Dignitary Showcase (Title, Subtitle, Date & Speakers) -->
+      <div class="page1-intro-panel">
+        <div class="page1-intro-title" contenteditable="true">
+          Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections
+        </div>
+        <div class="page1-intro-meta">
+          <span><strong>Dates:</strong> November 4–6, 2026</span>
+          <span><strong>Venue:</strong> Puerto Princesa City Library</span>
+          <span><strong>Host:</strong> City Government of Puerto Princesa</span>
+        </div>
+
+        <!-- 5-Column Dignitary & Speaker Lineup -->
+        <div class="page1-roster-grid">
+          <div class="roster-card-mini">
+            <span class="role">Resource Speaker</span>
+            <span class="name" contenteditable="true">ALEXANDER O. VETUS</span>
+          </div>
+          <div class="roster-card-mini">
+            <span class="role">Resource Speaker</span>
+            <span class="name" contenteditable="true">GENKIE R. ALBANO</span>
+          </div>
+          <div class="roster-card-mini">
+            <span class="role">Resource Speaker</span>
+            <span class="name" contenteditable="true">GERALDINE S. FRANCIA</span>
+          </div>
+          <div class="roster-card-mini official">
+            <span class="role">Moderator / Facilitator</span>
+            <span class="name" contenteditable="true">DON ANGEL LOU M. SALVATIERRA</span>
+          </div>
+          <div class="roster-card-mini official">
+            <span class="role">City Librarian</span>
+            <span class="name" contenteditable="true">JOYMARIE B. OLAPE, RL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 1 Banner -->
+      <div class="day-banner">
+        <div class="day-banner-left">
+          <span class="day-banner-badge">Program Schedule</span>
+          <span class="day-banner-title" contenteditable="true">DAY 1 — FOUNDATIONS &amp; CONSERVATION TECHNIQUES</span>
+        </div>
+        <div class="day-banner-date" contenteditable="true">
+          Wednesday<br />Nov 4, 2026
+        </div>
+      </div>
+
+      <!-- Day 1 Schedule Table -->
+      <div class="schedule-table">
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:15 – 1:30 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Registration and Attendance of Participants</span>
+            <span class="schedule-notes" contenteditable="true">Attendance confirmation, kit distribution, and assembly of library custodians</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:30 – 1:35 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Doxology and Philippine National Anthem</span>
+            <span class="schedule-notes" contenteditable="true">Solemn invocation and institutional flag ceremony</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:35 – 1:40 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Welcome Remarks</span>
+            <span class="schedule-notes" contenteditable="true">Opening statement and program orientation by City Librarian Joymarie B. Olape, RL</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:40 – 3:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Lecture: Basic and Practical Tips on the Conservation of Library Collections</span>
+            <span class="schedule-notes" contenteditable="true">Environmental control, handling principles, acidity assessment, and deterioration factors</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">3:00 – 3:30 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Health Break &amp; Refreshments</span>
+            <span class="schedule-notes" contenteditable="true">Networking, workshop workstation setup, and preparation of repair tools</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">3:30 – 4:30 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Hands-On Practicum: Mending &amp; Encapsulation of Loose Paper</span>
+            <span class="schedule-notes" contenteditable="true">Fastener and metal clip removal, dry cleaning techniques, Japanese tissue mending, and polyester encapsulation</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">4:30 – 5:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Administrative Matters &amp; End of Day 1</span>
+            <span class="schedule-notes" contenteditable="true">Synthesis of first-day outputs, workstation cleanup, and briefing for Day 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <footer class="running-footer">
+        <span>Puerto Princesa City Library • Training-Workshop 2026</span>
+        <span class="pg-num">Page 1</span>
+        <span>Back-to-Back Program Guide</span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 3: INSIDE PAGE 2 (Day 2: Book Binding & Newspaper Binding)
+       ======================================================== -->
+  <section class="a4-program-page inside-page print-page" id="program-page-day2">
+    <div class="inside-frame"></div>
+    <!-- Inside Corner Ornaments -->
+    <div class="inside-corner ic-tl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-tr">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-bl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-br">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+
+    <div class="inside-container">
+      <!-- Running Header -->
+      <header class="running-header">
+        <div class="rh-left">
+          <img src="logo/ppcitylibrary-logo.png" alt="PPCL" />
+          <div class="rh-titles">
+            <span class="dept">Puerto Princesa City Library • Training-Workshop</span>
+            <span class="event">Preservation &amp; Conservation of Paper-Based Collections</span>
+          </div>
+        </div>
+        <div class="rh-right">
+          <span>Hands-On Practicum</span>
+        </div>
+      </header>
+
+      <!-- Day 2 Banner -->
+      <div class="day-banner">
+        <div class="day-banner-left">
+          <span class="day-banner-badge">Program Schedule</span>
+          <span class="day-banner-title" contenteditable="true">DAY 2 — BOOK BINDING &amp; NEWSPAPER BINDING</span>
+        </div>
+        <div class="day-banner-date" contenteditable="true">
+          Thursday<br />Nov 5, 2026
+        </div>
+      </div>
+
+      <!-- Day 2 Schedule Table -->
+      <div class="schedule-table">
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">8:00 – 8:30 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Registration and Attendance of Participants</span>
+            <span class="schedule-notes" contenteditable="true">Participant check-in and preparation of bookbinding needles, thread, and book cloth</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">8:30 – 9:00 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Recap of Day 1 and Overview of Day 2</span>
+            <span class="schedule-notes" contenteditable="true">Review of surface cleaning and encapsulation; introduction to book structural anatomy</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">9:00 – 10:00 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Workshop 1: Book Binding (Single and Basic Stitch)</span>
+            <span class="schedule-notes" contenteditable="true">Demonstration of pamphlet stitching, multiple signature sewing, and spine reinforcement</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">10:00 – 10:30 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Health Break &amp; Refreshments</span>
+            <span class="schedule-notes" contenteditable="true">Short break and materials distribution for book enclosure crafting</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">10:30 AM – 12:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Continuation of Workshop 1: Book Enclosure &amp; Structural Assembly</span>
+            <span class="schedule-notes" contenteditable="true">Hands-on crafting of custom phase boxes, protective four-flap enclosures, and endpaper attachment</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break" style="background: rgba(14, 43, 92, 0.08); border-left: 3.5px solid var(--navy-royal);">
+          <div class="schedule-time-box" style="background: var(--navy-deep);">
+            <span class="schedule-time-text" contenteditable="true">12:00 – 1:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Lunch Break</span>
+            <span class="schedule-notes" contenteditable="true">Lunch intermission and setting up afternoon serials workstations</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:00 – 3:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Workshop 2: Newspaper Binding (Softbound Techniques)</span>
+            <span class="schedule-notes" contenteditable="true">Collation of serial periodicals, punching, spine lacing, and soft cover casing techniques</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">3:00 – 3:30 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Health Break &amp; Refreshments</span>
+            <span class="schedule-notes" contenteditable="true">Short recess and preparation for final volume curing and trimming</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">3:30 – 5:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Continuation of Workshop 2: Finalizing Bound Newspaper Volumes</span>
+            <span class="schedule-notes" contenteditable="true">Corner reinforcement, spine titling, pressing, and inspection of completed softbound volumes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <footer class="running-footer">
+        <span>Puerto Princesa City Library • Training-Workshop 2026</span>
+        <span class="pg-num">Page 2</span>
+        <span>Back-to-Back Program Guide</span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 4: INSIDE PAGE 3 (Day 3: Outputs, Evaluation & Certificates)
+       ======================================================== -->
+  <section class="a4-program-page inside-page print-page" id="program-page-day3">
+    <div class="inside-frame"></div>
+    <!-- Inside Corner Ornaments -->
+    <div class="inside-corner ic-tl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-tr">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-bl">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+    <div class="inside-corner ic-br">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M2 2H96V8H8V96H2V2Z" fill="#C59B27"/></svg>
+    </div>
+
+    <div class="inside-container">
+      <!-- Running Header -->
+      <header class="running-header">
+        <div class="rh-left">
+          <img src="logo/ppcitylibrary-logo.png" alt="PPCL" />
+          <div class="rh-titles">
+            <span class="dept">Puerto Princesa City Library • Training-Workshop</span>
+            <span class="event">Preservation &amp; Conservation of Paper-Based Collections</span>
+          </div>
+        </div>
+        <div class="rh-right">
+          <span>Final Presentations</span>
+        </div>
+      </header>
+
+      <!-- Day 3 Banner -->
+      <div class="day-banner">
+        <div class="day-banner-left">
+          <span class="day-banner-badge">Program Schedule</span>
+          <span class="day-banner-title" contenteditable="true">DAY 3 — PRESENTATION OF OUTPUTS &amp; CEREMONIES</span>
+        </div>
+        <div class="day-banner-date" contenteditable="true">
+          Friday<br />Nov 6, 2026
+        </div>
+      </div>
+
+      <!-- Day 3 Schedule Table -->
+      <div class="schedule-table">
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">8:00 – 8:30 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Registration and Attendance of Participants</span>
+            <span class="schedule-notes" contenteditable="true">Attendance confirmation and exhibition gallery setup of participant outputs</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">8:30 – 9:00 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Recap of Day 2 and Overview of Day 3</span>
+            <span class="schedule-notes" contenteditable="true">Highlights of binding techniques and briefing on presentation criteria</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">9:00 – 10:00 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Presentation of Outputs: Book Binding &amp; Repair Work</span>
+            <span class="schedule-notes" contenteditable="true">Participant showcase and critique of stitched books, spine repairs, and custom enclosures</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">10:00 – 10:30 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Health Break &amp; Refreshments</span>
+            <span class="schedule-notes" contenteditable="true">Viewing of gallery outputs and informal peer consultations</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">10:30 AM – 12:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Continuation of Presentation of Outputs: Newspaper Volumes</span>
+            <span class="schedule-notes" contenteditable="true">Review of softbound newspaper compilations, encapsulation samples, and structural integrity</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break" style="background: rgba(14, 43, 92, 0.08); border-left: 3.5px solid var(--navy-royal);">
+          <div class="schedule-time-box" style="background: var(--navy-deep);">
+            <span class="schedule-time-text" contenteditable="true">12:00 – 1:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Lunch Break</span>
+            <span class="schedule-notes" contenteditable="true">Lunch intermission and tabulating evaluation forms</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">1:00 – 3:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Continuation of Presentation &amp; Resource Speaker Critiques</span>
+            <span class="schedule-notes" contenteditable="true">Expert feedback from Speakers Alexander Vetus, Genkie Albano, and Geraldine Francia</span>
+          </div>
+        </div>
+
+        <div class="schedule-item break">
+          <div class="schedule-time-box">
+            <span class="schedule-time-text" contenteditable="true">3:00 – 3:30 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Health Break &amp; Refreshments</span>
+            <span class="schedule-notes" contenteditable="true">Preparation for closing ceremony and ceremonial certificate signing</span>
+          </div>
+        </div>
+
+        <div class="schedule-item highlight" style="background: rgba(255, 248, 219, 0.55); border-left: 3.5px solid var(--gold-rich);">
+          <div class="schedule-time-box" style="background: linear-gradient(135deg, #7A5809 0%, #B88917 100%);">
+            <span class="schedule-time-text" contenteditable="true">3:30 – 5:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-activity" contenteditable="true">Program Evaluation and Distribution of Certificates</span>
+            <span class="schedule-notes" contenteditable="true">Post-training evaluation, awarding of Certificates of Participation to 25 staff &amp; Certificates of Recognition to Speakers</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Institutional Sign-Off / Acknowledgement Box -->
+      <div class="closing-endorsement-box">
+        <div class="ce-left">
+          <span class="ce-kicker">Program Secretariat &amp; Organizing Authority</span>
+          <span class="ce-librarian" contenteditable="true">JOYMARIE B. OLAPE, RL</span>
+          <span class="ce-title" contenteditable="true">City Librarian • Puerto Princesa City Library</span>
+        </div>
+        <div class="ce-right">
+          <svg width="46" height="46" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="56" r="45" fill="none" stroke="#C59B27" stroke-width="2.2"/>
+            <circle cx="60" cy="56" r="38" stroke="#C59B27" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <path d="M44 52C49 49.5 55 50.5 60 53.5C65 50.5 71 49.5 76 52V67C71 64.5 65 65.5 60 68.5C55 65.5 49 64.5 44 67V52Z" fill="none" stroke="#C59B27" stroke-width="1.8"/>
+            <line x1="60" y1="53.5" x2="60" y2="68.5" stroke="#C59B27" stroke-width="1.8"/>
+            <circle cx="60" cy="40" r="3" fill="#C59B27"/>
+            <text x="60" y="80" text-anchor="middle" fill="#C59B27" font-family="'Cinzel', serif" font-size="8" font-weight="700" letter-spacing="1">ARCHIVES</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <footer class="running-footer">
+        <span>Puerto Princesa City Library • Training-Workshop 2026</span>
+        <span class="pg-num">Page 3</span>
+        <span>Back-to-Back Program Guide</span>
+      </footer>
+    </div>
+  </section>
+
+</body>
+</html>
