@@ -35,59 +35,121 @@
       z-index: 0;
     }
 
-    /* Editorial Vignette & Contrast Scrim so Typography Pops while Books & Gold Ribbons Shine Through */
+    /* Contrast Scrim & Atmospheric Vignette */
     .tarp-editorial-scrim {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 54% 44% at 50% 45%, rgba(5, 17, 38, 0.82) 0%, rgba(5, 17, 38, 0.52) 62%, rgba(4, 12, 28, 0.22) 100%),
-        linear-gradient(180deg, rgba(4, 14, 32, 0.68) 0%, rgba(6, 20, 45, 0.12) 22%, rgba(6, 20, 45, 0.22) 68%, rgba(4, 12, 28, 0.72) 100%);
+        radial-gradient(ellipse 62% 50% at 50% 44%, rgba(5, 17, 38, 0.84) 0%, rgba(5, 17, 38, 0.54) 65%, rgba(4, 12, 28, 0.25) 100%),
+        linear-gradient(180deg, rgba(4, 14, 32, 0.74) 0%, rgba(6, 20, 45, 0.14) 22%, rgba(6, 20, 45, 0.24) 66%, rgba(4, 12, 28, 0.9) 100%);
       z-index: 1;
     }
 
-    /* Fine Architectural Outer Hairline Frame */
+    /* Neoclassical Multi-Tier Architectural Gold Framing */
     .tarp-architectural-border {
       position: absolute;
-      inset: 22px;
-      border: 1.5px solid rgba(229, 193, 88, 0.55);
+      inset: 20px;
+      border: 1.5px solid rgba(229, 193, 88, 0.45);
       pointer-events: none;
       z-index: 4;
+    }
+
+    .tarp-architectural-border::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 2px solid rgba(229, 193, 88, 0.8);
+      box-shadow: inset 0 0 20px rgba(229, 193, 88, 0.08);
     }
 
     .tarp-architectural-border::after {
       content: "";
       position: absolute;
-      inset: 6px;
-      border: 1px solid rgba(229, 193, 88, 0.22);
+      inset: 16px;
+      border: 1px dashed rgba(229, 193, 88, 0.35);
     }
 
-    /* Content Container */
+    /* Corner Ornamental Filigrees */
+    .corner-ornament {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .corner-ornament svg {
+      width: 100%;
+      height: 100%;
+    }
+    .corner-tl { top: 22px; left: 22px; }
+    .corner-tr { top: 22px; right: 22px; transform: scaleX(-1); }
+    .corner-bl { bottom: 22px; left: 22px; transform: scaleY(-1); }
+    .corner-br { bottom: 22px; right: 22px; transform: scale(-1, -1); }
+
+    /* Side Architectural Guidelines */
+    .side-accent-left, .side-accent-right {
+      position: absolute;
+      top: 150px;
+      bottom: 270px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(229, 193, 88, 0.35) 20%, rgba(229, 193, 88, 0.35) 80%, transparent 100%);
+      z-index: 4;
+      pointer-events: none;
+    }
+    .side-accent-left { left: 48px; }
+    .side-accent-right { right: 48px; }
+
+    /* Subtle Archival Conservation Crest Watermark */
+    .crest-watermark {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 640px;
+      height: 640px;
+      opacity: 0.045;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Content Layout Container */
     .tarp-content {
       position: relative;
       z-index: 3;
       width: 100%;
       height: 100%;
-      padding: 46px 76px 48px;
+      padding: 42px 76px 40px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* 1. Institutional Authority Header (Clean, Integrated, Unboxed) */
+    /* 1. Institutional Authority Header */
     .inst-header {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 22px;
-      border-bottom: 1px solid rgba(229, 193, 88, 0.38);
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(229, 193, 88, 0.4);
+      position: relative;
+    }
+
+    .inst-header::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(229, 193, 88, 0.5) 50%, transparent 100%);
     }
 
     .inst-logos-group {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
     .logo-medallion {
@@ -97,6 +159,7 @@
       background: #FFFFFF;
       padding: 5px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      border: 2px solid var(--gold-rich);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -106,6 +169,19 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+
+    .seal-medallion {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(14, 43, 92, 0.9) 0%, rgba(6, 20, 45, 0.95) 100%);
+      border: 2px solid var(--gold-bright);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
     }
 
     .inst-agency-copy {
@@ -120,114 +196,141 @@
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.84);
     }
 
     .inst-agency-copy .gov-lgu {
       font-family: var(--font-serif);
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #F8FAFC;
     }
 
     .inst-agency-copy .gov-lib {
       font-family: var(--font-display);
-      font-size: 28px;
+      font-size: 29px;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold-bright);
       margin-top: 2px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
-    /* 2. Core Focal Point: Monumental Editorial Typographic Lockup */
+    /* 2. Monumental Focal Stage */
     .focal-stage {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      max-width: 1340px;
+      max-width: 1420px;
       margin: auto 0;
+    }
+
+    .stage-heraldic-accent {
+      margin-bottom: 14px;
+      opacity: 0.9;
     }
 
     .overline-lockup {
       display: flex;
       align-items: center;
       gap: 20px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .overline-rule {
-      width: 72px;
+      width: 80px;
       height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-bright) 100%);
+    }
+    .overline-rule.right {
+      background: linear-gradient(90deg, var(--gold-bright) 0%, transparent 100%);
+    }
+
+    .diamond-bullet {
+      width: 7px;
+      height: 7px;
       background: var(--gold-bright);
+      transform: rotate(45deg);
     }
 
     .overline-text {
       font-family: var(--font-sans);
       font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.34em;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
       color: var(--gold-bright);
     }
 
     .headline-tier-1 {
       font-family: var(--font-display);
-      font-size: 68px;
+      font-size: 74px;
       font-weight: 800;
       letter-spacing: 0.08em;
       line-height: 1.02;
       color: #FFFFFF;
       text-transform: uppercase;
-      text-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+      text-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
     }
 
     .headline-tier-bridge {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 40px;
+      font-size: 42px;
       font-weight: 600;
       color: #F3E3B2;
       letter-spacing: 0.03em;
       margin: 6px 0 4px;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
 
     .headline-tier-2 {
       font-family: var(--font-display);
-      font-size: 64px;
+      font-size: 70px;
       font-weight: 800;
       letter-spacing: 0.05em;
       line-height: 1.06;
       text-transform: uppercase;
-      background: linear-gradient(180deg, #FFF6D1 0%, #E8C35A 55%, #C59620 100%);
+      background: linear-gradient(180deg, #FFF8DB 0%, #E8C35A 52%, #C59620 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.55));
+      filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.6));
     }
 
-    /* Clean Architectural Logistics Bar (Date & Venue) */
+    /* Archival Divider Ornament */
+    .archival-divider-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      opacity: 0.95;
+    }
+
+    /* Clean Architectural 3-Column Logistics Pedestal */
     .logistics-bar {
-      margin-top: 34px;
+      margin-top: 24px;
       display: inline-flex;
       align-items: center;
-      border-top: 1.5px solid rgba(229, 193, 88, 0.65);
-      border-bottom: 1.5px solid rgba(229, 193, 88, 0.65);
-      background: rgba(6, 20, 45, 0.68);
-      backdrop-filter: blur(6px);
-      padding: 14px 44px;
-      gap: 36px;
+      border: 1.5px solid rgba(229, 193, 88, 0.65);
+      background: linear-gradient(180deg, rgba(8, 25, 54, 0.82) 0%, rgba(4, 13, 30, 0.94) 100%);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+      border-radius: 8px;
+      padding: 14px 50px;
+      gap: 40px;
     }
 
     .logistics-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 3px;
     }
 
     .logistics-label {
@@ -250,132 +353,256 @@
 
     .logistics-divider {
       width: 1.5px;
-      height: 38px;
-      background: rgba(229, 193, 88, 0.5);
+      height: 40px;
+      background: linear-gradient(180deg, transparent 0%, rgba(229, 193, 88, 0.6) 20%, rgba(229, 193, 88, 0.6) 80%, transparent 100%);
     }
 
-    /* 3. Lower-Third Architectural Roster Panel */
-    .roster-panel {
+    /* 3. Lower Architectural Heritage Pillars Showcase (Replacing Personal Names) */
+    .heritage-framework {
       width: 100%;
-      background: linear-gradient(180deg, rgba(7, 22, 48, 0.86) 0%, rgba(4, 13, 30, 0.94) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: linear-gradient(180deg, rgba(7, 22, 48, 0.92) 0%, rgba(4, 13, 30, 0.98) 100%);
       border-top: 2px solid var(--gold-rich);
-      border-bottom: 1px solid rgba(229, 193, 88, 0.4);
-      backdrop-filter: blur(10px);
-      padding: 22px 36px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      border-bottom: 1.5px solid rgba(229, 193, 88, 0.5);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.4);
+      padding: 18px 24px 20px;
+      position: relative;
     }
 
-    .speakers-3col {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      width: 100%;
-    }
-
-    .roster-col {
+    /* Mandate Banner Lockup */
+    .mandate-banner {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4px 20px;
-      border-right: 1px solid rgba(229, 193, 88, 0.28);
+      gap: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(229, 193, 88, 0.3);
+      position: relative;
     }
 
-    .roster-col:last-child {
-      border-right: none;
+    .mandate-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(229, 193, 88, 0.45) 50%, transparent 100%);
     }
 
-    .roster-name {
+    .mandate-text {
       font-family: var(--font-display);
-      font-size: 25px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #FFFFFF;
-    }
-
-    .roster-role {
-      margin-top: 4px;
-      font-family: var(--font-sans);
-      font-size: 12px;
+      font-size: 13.5px;
       font-weight: 700;
       letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .roster-horizontal-rule {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(229, 193, 88, 0.4) 20%, rgba(229, 193, 88, 0.4) 80%, transparent 100%);
+    .mandate-star {
+      color: var(--gold-bright);
+      font-size: 11px;
     }
 
-    .officials-2col {
+    /* 4-Column Architectural Pillar Grid */
+    .pillars-grid-4col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
       width: 100%;
     }
 
-    .official-col {
+    .pillar-card {
+      background: rgba(14, 38, 77, 0.45);
+      border: 1px solid rgba(229, 193, 88, 0.3);
+      border-top: 2px solid var(--gold-bright);
+      border-radius: 6px;
+      padding: 14px 16px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 2px 20px;
-      border-right: 1px solid rgba(229, 193, 88, 0.28);
+      text-align: center;
+      gap: 6px;
+      position: relative;
+      transition: background 0.2s ease;
     }
 
-    .official-col:last-child {
-      border-right: none;
+    .pillar-card:hover {
+      background: rgba(14, 38, 77, 0.65);
     }
 
-    .official-name {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #F8FAFC;
-    }
-
-    .official-role {
-      margin-top: 3px;
+    .pillar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 193, 88, 0.15);
+      border: 1px solid rgba(229, 193, 88, 0.45);
+      color: var(--gold-bright);
       font-family: var(--font-sans);
-      font-size: 11.5px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 800;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #7CC4FA;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-top: 2px;
+      line-height: 1.25;
+    }
+
+    .pillar-desc {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #CBD5E1;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+    }
+
+    .pillar-corner-flourish {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--gold-bright);
+      pointer-events: none;
+    }
+    .pcf-tl { top: 3px; left: 3px; border-right: none; border-bottom: none; }
+    .pcf-br { bottom: 3px; right: 3px; border-left: none; border-top: none; }
+
+    /* Toast Notification for Instant PNG Download */
+    .download-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0E2B5C;
+      border: 1.5px solid var(--gold-bright);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
 
+  <!-- Floating Studio Toolbar -->
   <div class="studio-toolbar">
     <div class="toolbar-left">
       <a href="index.html" class="back-link">← Studio Hub</a>
       <h1>3A. Tarpaulin Design (4:3 Aspect Ratio)</h1>
-      <span class="spec-badge">4:3 Ratio • Editorial Conference Backdrop • 3200×2400px</span>
+      <span class="spec-badge">4:3 Stage Backdrop • Editorial Conference Display • 3200×2400px</span>
     </div>
     <div class="toolbar-actions">
-      <a href="03-tarpaulin-16x9.html" class="btn-outline" style="text-decoration:none;">Switch to 16:9 Widescreen →</a>
-      <button class="btn-gold" onclick="window.print()">🖨️ Print / Save PDF</button>
+      <a href="03-tarpaulin-16x9.html" class="btn-outline" style="text-decoration:none;">Switch to 16:9 Widescreen</a>
+      <!-- Primary Action: High-Res PNG Download -->
+      <a href="exports/png/03-tarpaulin-4x3.png" download="PPCL-Tarpaulin-4x3-Backdrop.png" class="btn-gold" id="btn-download-png" onclick="showDownloadNotice('PNG (4:3 High-Res Backdrop)')">🖼️ Download High-Res PNG</a>
+      <!-- PDF Print / Save Option -->
+      <button class="btn-outline" onclick="window.print()">🖨️ Print / Save Vector PDF</button>
     </div>
   </div>
 
+  <div id="download-toast" class="download-toast">✅ High-resolution PNG downloading...</div>
+
+  <!-- Main Tarpaulin Canvas (1600x1200) -->
   <section class="tarp-4x3 print-page" id="tarp-4x3-canvas">
-    <img class="tarp-backdrop-img" src="shared/bg_archival_tarp.jpg" alt="" />
+    <img class="tarp-backdrop-img" src="shared/bg_archival_tarp.jpg" alt="Archival Backdrop" />
     <div class="tarp-editorial-scrim"></div>
     <div class="tarp-architectural-border"></div>
 
+    <!-- 4 Neoclassical Corner Filigree Ornaments -->
+    <div class="corner-ornament corner-tl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <path d="M12 38C26 38 38 26 38 12" stroke="#E5C158" stroke-width="2.5"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+        <path d="M28 28L46 46" stroke="#E5C158" stroke-width="2"/>
+        <circle cx="48" cy="48" r="3.5" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="corner-ornament corner-tr">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <path d="M12 38C26 38 38 26 38 12" stroke="#E5C158" stroke-width="2.5"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+        <path d="M28 28L46 46" stroke="#E5C158" stroke-width="2"/>
+        <circle cx="48" cy="48" r="3.5" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="corner-ornament corner-bl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <path d="M12 38C26 38 38 26 38 12" stroke="#E5C158" stroke-width="2.5"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+        <path d="M28 28L46 46" stroke="#E5C158" stroke-width="2"/>
+        <circle cx="48" cy="48" r="3.5" fill="#E5C158"/>
+      </svg>
+    </div>
+    <div class="corner-ornament corner-br">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2H96V8H8V96H2V2Z" fill="#E5C158"/>
+        <path d="M12 12H78V16H16V78H12V12Z" fill="#0E2B5C" fill-opacity="0.8"/>
+        <path d="M2 28H28V2H23V23H2V28Z" fill="#E5C158"/>
+        <path d="M12 38C26 38 38 26 38 12" stroke="#E5C158" stroke-width="2.5"/>
+        <circle cx="22" cy="22" r="4.5" fill="#0E2B5C"/>
+        <circle cx="22" cy="22" r="2.2" fill="#E5C158"/>
+        <path d="M28 28L46 46" stroke="#E5C158" stroke-width="2"/>
+        <circle cx="48" cy="48" r="3.5" fill="#E5C158"/>
+      </svg>
+    </div>
+
+    <!-- Architectural Side Guidelines -->
+    <div class="side-accent-left"></div>
+    <div class="side-accent-right"></div>
+
+    <!-- Background Archival Conservation Crest Watermark -->
+    <svg class="crest-watermark" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="110" cy="110" r="102" stroke="#E5C158" stroke-width="2.5"/>
+      <circle cx="110" cy="110" r="94" stroke="#E5C158" stroke-width="1.2" stroke-dasharray="5 3"/>
+      <circle cx="110" cy="110" r="87" stroke="#E5C158" stroke-width="1"/>
+      <g stroke="#E5C158" stroke-width="1" opacity="0.6">
+        <line x1="110" y1="24" x2="110" y2="196"/>
+        <line x1="24" y1="110" x2="196" y2="110"/>
+        <line x1="49" y1="49" x2="171" y2="171"/>
+        <line x1="171" y1="49" x2="49" y2="171"/>
+      </g>
+      <path d="M62 168C36 144 32 102 50 68C60 50 76 38 94 33" stroke="#E5C158" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M158 168C184 144 188 102 170 68C160 50 144 38 126 33" stroke="#E5C158" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M50 98C70 91 92 94 110 104C128 94 150 91 170 98V154C150 147 128 150 110 160C92 150 70 147 50 154V98Z" stroke="#E5C158" stroke-width="2"/>
+    </svg>
+
     <div class="tarp-content">
-      <!-- 1. Institutional Header -->
+      <!-- 1. Institutional Authority Header -->
       <header class="inst-header">
         <div class="inst-logos-group">
           <div class="logo-medallion">
-            <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
+            <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal of Puerto Princesa" />
           </div>
           <div class="logo-medallion">
-            <img src="logo/ppcitylibrary-logo.png" alt="PPCL Logo" />
+            <img src="logo/ppcitylibrary-logo.png" alt="Puerto Princesa City Library Logo" />
           </div>
         </div>
 
@@ -389,66 +616,140 @@
           <div class="logo-medallion">
             <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
           </div>
+          <div class="seal-medallion">
+            <svg width="50" height="50" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="56" r="45" fill="none" stroke="#E5C158" stroke-width="2.2"/>
+              <circle cx="60" cy="56" r="38" stroke="#E5C158" stroke-width="1.2" stroke-dasharray="3 2"/>
+              <path d="M44 52C49 49.5 55 50.5 60 53.5C65 50.5 71 49.5 76 52V67C71 64.5 65 65.5 60 68.5C55 65.5 49 64.5 44 67V52Z" fill="none" stroke="#E5C158" stroke-width="1.8"/>
+              <line x1="60" y1="53.5" x2="60" y2="68.5" stroke="#E5C158" stroke-width="1.8"/>
+              <circle cx="60" cy="40" r="3" fill="#E5C158"/>
+              <text x="60" y="80" text-anchor="middle" fill="#E5C158" font-family="'Cinzel', serif" font-size="8" font-weight="700" letter-spacing="1">ARCHIVES</text>
+            </svg>
+          </div>
         </div>
       </header>
 
       <!-- 2. Monumental Focal Title Lockup -->
       <div class="focal-stage">
+        <!-- Delicate Medallion Accent -->
+        <div class="stage-heraldic-accent">
+          <svg width="40" height="20" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20H32M48 20H70" stroke="#E5C158" stroke-width="1.6"/>
+            <polygon points="40,10 46,20 40,30 34,20" fill="#E5C158"/>
+            <circle cx="40" cy="20" r="2.5" fill="#0E2B5C"/>
+          </svg>
+        </div>
+
         <div class="overline-lockup">
           <span class="overline-rule"></span>
+          <span class="diamond-bullet"></span>
           <span class="overline-text" contenteditable="true">Three-Day Archival Capacity-Building Program</span>
-          <span class="overline-rule"></span>
+          <span class="diamond-bullet"></span>
+          <span class="overline-rule right"></span>
         </div>
 
         <h2 class="headline-tier-1" contenteditable="true">Training-Workshop</h2>
         <div class="headline-tier-bridge" contenteditable="true">on Basic Preservation and Conservation of</div>
         <h3 class="headline-tier-2" contenteditable="true">Paper-Based Collections</h3>
 
+        <!-- Archival Vector Tome & Laurel Centerpiece Divider -->
+        <div class="archival-divider-wrap">
+          <svg width="400" height="26" viewBox="0 0 340 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="6" y1="12" x2="132" y2="12" stroke="#E5C158" stroke-width="1.8"/>
+            <polygon points="138,12 144,7 150,12 144,17" fill="#E5C158"/>
+            <path d="M170 5.5C164.5 5.5 159.5 7 157.5 9V19C159.5 17 164.5 15.5 170 15.5C175.5 15.5 180.5 17 182.5 19V9C180.5 7 175.5 5.5 170 5.5Z" stroke="#E5C158" stroke-width="2" fill="none"/>
+            <line x1="170" y1="6" x2="170" y2="16" stroke="#E5C158" stroke-width="1.8"/>
+            <polygon points="190,12 196,7 202,12 196,17" fill="#E5C158"/>
+            <line x1="208" y1="12" x2="334" y2="12" stroke="#E5C158" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <!-- 3-Column Logistics Pedestal -->
         <div class="logistics-bar">
           <div class="logistics-item">
-            <span class="logistics-label">Date</span>
+            <span class="logistics-label">Program Dates</span>
             <span class="logistics-value" contenteditable="true">November 4–6, 2026</span>
           </div>
           <div class="logistics-divider"></div>
           <div class="logistics-item">
-            <span class="logistics-label">Venue</span>
+            <span class="logistics-label">Official Venue</span>
             <span class="logistics-value" contenteditable="true">Puerto Princesa City Library</span>
+          </div>
+          <div class="logistics-divider"></div>
+          <div class="logistics-item">
+            <span class="logistics-label">Program Scope</span>
+            <span class="logistics-value" contenteditable="true">Documentary Heritage Stewardship</span>
           </div>
         </div>
       </div>
 
-      <!-- 3. Lower-Third Architectural Speaker & Official Roster -->
-      <footer class="roster-panel">
-        <div class="speakers-3col">
-          <div class="roster-col">
-            <div class="roster-name" contenteditable="true">ALEXANDER O. VETUS</div>
-            <div class="roster-role" contenteditable="true">Resource Speaker</div>
+      <!-- 3. Lower Architectural Heritage Pillars Showcase (Replacing Personal Names) -->
+      <footer class="heritage-framework">
+        <!-- Archival Mandate Ribbon -->
+        <div class="mandate-banner">
+          <span class="mandate-rule"></span>
+          <div class="mandate-text">
+            <span class="mandate-star">✦</span>
+            <span>Safeguarding Historical Records</span>
+            <span class="mandate-star">•</span>
+            <span>Preserving Cultural Heritage</span>
+            <span class="mandate-star">•</span>
+            <span>Empowering Library Stewards</span>
+            <span class="mandate-star">✦</span>
           </div>
-          <div class="roster-col">
-            <div class="roster-name" contenteditable="true">GENKIE R. ALBANO</div>
-            <div class="roster-role" contenteditable="true">Resource Speaker</div>
-          </div>
-          <div class="roster-col">
-            <div class="roster-name" contenteditable="true">GERALDINE S. FRANCIA</div>
-            <div class="roster-role" contenteditable="true">Resource Speaker</div>
-          </div>
+          <span class="mandate-rule"></span>
         </div>
 
-        <div class="roster-horizontal-rule"></div>
-
-        <div class="officials-2col">
-          <div class="official-col">
-            <div class="official-name" contenteditable="true">DON ANGEL LOU M. SALVATIERRA</div>
-            <div class="official-role" contenteditable="true">Moderator / Facilitator</div>
+        <!-- 4 Core Archival Pillars -->
+        <div class="pillars-grid-4col">
+          <div class="pillar-card">
+            <div class="pillar-corner-flourish pcf-tl"></div>
+            <div class="pillar-corner-flourish pcf-br"></div>
+            <span class="pillar-badge">Pillar 01</span>
+            <h4 class="pillar-title" contenteditable="true">Paper Science &amp; Decay</h4>
+            <p class="pillar-desc" contenteditable="true">Fiber Deterioration • Acid Testing • Environmental Vulnerability Assessment</p>
           </div>
-          <div class="official-col">
-            <div class="official-name" contenteditable="true">JOYMARIE B. OLAPE, RL</div>
-            <div class="official-role" contenteditable="true">City Librarian • Puerto Princesa City Library</div>
+
+          <div class="pillar-card">
+            <div class="pillar-corner-flourish pcf-tl"></div>
+            <div class="pillar-corner-flourish pcf-br"></div>
+            <span class="pillar-badge">Pillar 02</span>
+            <h4 class="pillar-title" contenteditable="true">Preventive Housing</h4>
+            <p class="pillar-desc" contenteditable="true">Deacidification • Acid-Free Enclosures • Phase Box Crafting &amp; Storage</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-corner-flourish pcf-tl"></div>
+            <div class="pillar-corner-flourish pcf-br"></div>
+            <span class="pillar-badge">Pillar 03</span>
+            <h4 class="pillar-title" contenteditable="true">Surface Cleaning &amp; Mending</h4>
+            <p class="pillar-desc" contenteditable="true">Mechanical Dry Cleaning • Japanese Tissue • Reversible Starch Adhesion</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-corner-flourish pcf-tl"></div>
+            <div class="pillar-corner-flourish pcf-br"></div>
+            <span class="pillar-badge">Pillar 04</span>
+            <h4 class="pillar-title" contenteditable="true">Disaster Risk &amp; Salvage</h4>
+            <p class="pillar-desc" contenteditable="true">Water Damage Triage • Emergency Salvage Protocols • Long-Term Security</p>
           </div>
         </div>
       </footer>
     </div>
   </section>
+
+  <script>
+    function showDownloadNotice(format) {
+      const toast = document.getElementById('download-toast');
+      if (toast) {
+        toast.textContent = '✅ Downloading ' + format + '...';
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 3500);
+      }
+    }
+  </script>
 
 </body>
 </html>
