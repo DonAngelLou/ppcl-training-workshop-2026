@@ -8,11 +8,12 @@
   <style>
     /* ========================================================
        PRINT SETUP: 1 A4 SHEET BACK-TO-BACK (LANDSCAPE BIFOLD)
-       Page 1 = Sheet 1 Outer Spread (Day 3 / Back + Cover / Front)
-       Page 2 = Sheet 2 Inner Spread (Speakers & Day 1 + Day 2)
+       A4 Landscape: 297mm width x 210mm height
+       Sheet 1 Outer Spread: Page 4 (Back) + Page 1 (Front Cover)
+       Sheet 2 Inner Spread: Page 2 (Inside Left) + Page 3 (Inside Right)
        ======================================================== */
     @page {
-      size: 297mm 210mm; /* A4 Landscape */
+      size: 297mm 210mm;
       margin: 0;
     }
 
@@ -23,15 +24,15 @@
     }
 
     body {
-      background-color: #141B26;
-      color: #1F2430;
+      background-color: #0E1624;
+      color: #1A202C;
       font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
       margin: 0;
-      padding: 32px 20px 80px;
+      padding: 30px 20px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 36px;
+      gap: 32px;
     }
 
     /* Interactive Toolbar */
@@ -46,45 +47,41 @@
       gap: 16px;
       width: 297mm;
       max-width: calc(100vw - 40px);
-      background: rgba(11, 37, 69, 0.95);
+      background: rgba(6, 21, 45, 0.95);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(229, 193, 88, 0.45);
-      border-radius: 12px;
+      border: 1px solid rgba(229, 193, 88, 0.5);
+      border-radius: 10px;
       padding: 12px 20px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
       color: #FFFFFF;
-    }
-
-    .toolbar-title {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
     }
 
     .toolbar-title h1 {
       margin: 0;
       font-family: 'Cinzel', serif;
-      font-size: 15px;
+      font-size: 16px;
       letter-spacing: 1px;
       color: #E5C158;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .toolbar-title p {
-      margin: 0;
+      margin: 3px 0 0;
       font-size: 11.5px;
-      color: #D1D8E2;
+      color: #CBD5E1;
     }
 
     .toolbar-badge {
-      display: inline-block;
-      background: rgba(229, 193, 88, 0.18);
-      border: 1px solid rgba(229, 193, 88, 0.5);
+      background: rgba(229, 193, 88, 0.2);
+      border: 1px solid rgba(229, 193, 88, 0.6);
       border-radius: 4px;
       padding: 2px 7px;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
       color: #F8E7A2;
-      margin-left: 6px;
+      text-transform: uppercase;
     }
 
     .toolbar-actions {
@@ -97,7 +94,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
+      padding: 8px 16px;
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
       font-weight: 600;
@@ -111,7 +108,8 @@
     .toolbar-btn-primary {
       background: linear-gradient(135deg, #E5C158, #C5A059);
       color: #06152D;
-      box-shadow: 0 2px 8px rgba(229, 193, 88, 0.35);
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(229, 193, 88, 0.4);
     }
     .toolbar-btn-primary:hover {
       background: linear-gradient(135deg, #F0D278, #D6B26A);
@@ -127,7 +125,6 @@
       background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Printing Notice Banner */
     .print-tip-banner {
       width: 297mm;
       max-width: calc(100vw - 40px);
@@ -142,12 +139,6 @@
       font-size: 12px;
       line-height: 1.4;
     }
-    .print-tip-banner svg {
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      fill: #E5C158;
-    }
 
     /* ========================================================
        A4 SPREAD CONTAINER (297mm x 210mm)
@@ -158,7 +149,7 @@
       position: relative;
       overflow: hidden;
       background: #FFFFFF;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       page-break-after: always;
       break-after: page;
       display: flex;
@@ -171,14 +162,14 @@
       break-after: auto;
     }
 
-    /* Bifold Spine Fold Guide */
+    /* Center Fold Spine Guide */
     .fold-crease-guide {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 148.5mm;
       width: 0;
-      border-left: 1px dashed rgba(197, 160, 89, 0.35);
+      border-left: 1px dashed rgba(197, 160, 89, 0.45);
       z-index: 100;
       pointer-events: none;
     }
@@ -188,20 +179,21 @@
       left: 50%;
       transform: translateX(-50%);
       font-size: 8px;
-      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(197, 160, 89, 0.7);
-      background: rgba(6, 21, 45, 0.6);
-      padding: 1px 6px;
+      color: #E5C158;
+      background: rgba(6, 21, 45, 0.85);
+      padding: 1px 8px;
       border-radius: 3px;
       pointer-events: none;
       z-index: 101;
+      border: 0.5px solid rgba(229, 193, 88, 0.5);
     }
-    .fold-notch-top { top: 3mm; }
-    .fold-notch-bottom { bottom: 3mm; }
+    .fold-notch-top { top: 2.5mm; }
+    .fold-notch-bottom { bottom: 2.5mm; }
 
-    /* Each Panel is an A5 Half-Sheet: 148.5mm x 210mm */
+    /* Half-Sheet Bifold Panel (148.5mm x 210mm) */
     .bifold-panel {
       width: 148.5mm;
       height: 210mm;
@@ -218,9 +210,8 @@
     .panel-cover {
       background-color: #06152D;
       color: #FFFFFF;
+      padding: 9mm 10mm 8mm 9mm;
       justify-content: space-between;
-      align-items: center;
-      padding: 10mm 12mm 9mm 10mm;
       text-align: center;
     }
 
@@ -234,41 +225,40 @@
       z-index: 0;
     }
 
-    .cover-editorial-scrim {
+    .cover-scrim {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(6, 21, 45, 0.88) 0%, rgba(6, 21, 45, 0.65) 60%, rgba(4, 12, 28, 0.35) 100%),
-        linear-gradient(180deg, rgba(4, 14, 32, 0.82) 0%, rgba(6, 20, 45, 0.2) 25%, rgba(6, 20, 45, 0.3) 65%, rgba(4, 12, 28, 0.94) 100%);
+        radial-gradient(ellipse 75% 60% at 50% 48%, rgba(6, 21, 45, 0.85) 0%, rgba(6, 21, 45, 0.6) 65%, rgba(3, 10, 24, 0.3) 100%),
+        linear-gradient(180deg, rgba(3, 11, 26, 0.88) 0%, rgba(6, 21, 45, 0.25) 20%, rgba(6, 21, 45, 0.3) 70%, rgba(3, 10, 24, 0.95) 100%);
       z-index: 1;
     }
 
-    .cover-border {
+    .cover-frame-border {
       position: absolute;
-      inset: 5mm;
-      border: 1.2px solid rgba(229, 193, 88, 0.5);
+      inset: 4.5mm;
+      border: 1.5px solid rgba(229, 193, 88, 0.6);
       pointer-events: none;
       z-index: 4;
     }
-
-    .cover-border::before {
+    .cover-frame-border::before {
       content: "";
       position: absolute;
       inset: 2mm;
-      border: 1.5px solid rgba(229, 193, 88, 0.8);
+      border: 1.8px solid rgba(229, 193, 88, 0.85);
     }
 
     .cover-corner {
       position: absolute;
-      width: 14mm;
-      height: 14mm;
+      width: 16mm;
+      height: 16mm;
       z-index: 5;
       pointer-events: none;
     }
-    .cover-corner-tl { top: 6mm; left: 6mm; border-top: 2px solid #E5C158; border-left: 2px solid #E5C158; }
-    .cover-corner-tr { top: 6mm; right: 6mm; border-top: 2px solid #E5C158; border-right: 2px solid #E5C158; }
-    .cover-corner-bl { bottom: 6mm; left: 6mm; border-bottom: 2px solid #E5C158; border-left: 2px solid #E5C158; }
-    .cover-corner-br { bottom: 6mm; right: 6mm; border-bottom: 2px solid #E5C158; border-right: 2px solid #E5C158; }
+    .cover-corner-tl { top: 5.5mm; left: 5.5mm; border-top: 2.5px solid #E5C158; border-left: 2.5px solid #E5C158; }
+    .cover-corner-tr { top: 5.5mm; right: 5.5mm; border-top: 2.5px solid #E5C158; border-right: 2.5px solid #E5C158; }
+    .cover-corner-bl { bottom: 5.5mm; left: 5.5mm; border-bottom: 2.5px solid #E5C158; border-left: 2.5px solid #E5C158; }
+    .cover-corner-br { bottom: 5.5mm; right: 5.5mm; border-bottom: 2.5px solid #E5C158; border-right: 2.5px solid #E5C158; }
 
     .cover-content {
       position: relative;
@@ -281,15 +271,17 @@
       align-items: center;
     }
 
-    .cover-header-lockup {
+    /* Cover Header */
+    .cover-header-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
-      margin-top: 2mm;
+      gap: 4px;
+      width: 100%;
+      margin-top: 1mm;
     }
 
-    .cover-seals-row {
+    .cover-seals-flex {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -297,196 +289,254 @@
     }
 
     .cover-seal-circle {
-      width: 38px;
-      height: 38px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.95);
+      background: #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(229, 193, 88, 0.7);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      border: 1.5px solid #E5C158;
     }
     .cover-seal-circle img {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       object-fit: contain;
     }
 
-    .cover-org-eyebrow {
+    .cover-republic-text {
       font-family: 'Montserrat', sans-serif;
       font-size: 7.2pt;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
       color: #E5C158;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+      margin-top: 2px;
     }
 
-    .cover-org-sub {
-      font-size: 6.2pt;
+    .cover-office-sub {
+      font-size: 6.8pt;
+      font-weight: 600;
       letter-spacing: 0.8px;
       color: #E2E8F0;
       text-transform: uppercase;
     }
 
-    .cover-divider-flourish {
+    .cover-divider-rule {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: 80%;
-      margin: 3px 0;
+      width: 85%;
+      margin: 2px 0;
     }
-    .cover-divider-flourish .line {
+    .cover-divider-rule .line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.7), transparent);
+      background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.8), transparent);
     }
-    .cover-divider-flourish .diamond {
+    .cover-divider-rule .diamond {
       width: 5px;
       height: 5px;
       background: #E5C158;
       transform: rotate(45deg);
     }
 
+    /* Cover Main Title Lockup */
     .cover-title-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      margin: 2mm 0;
+      gap: 5px;
+      margin: 1mm 0;
+      width: 100%;
     }
 
-    .cover-program-badge {
-      display: inline-block;
+    .cover-badge-pill {
       font-family: 'Cinzel', serif;
-      font-size: 7.5pt;
+      font-size: 7.8pt;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.2px;
       text-transform: uppercase;
       color: #06152D;
       background: linear-gradient(135deg, #F8E7A2, #E5C158, #C5A059);
-      padding: 3px 12px;
+      padding: 3px 14px;
       border-radius: 20px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
     }
 
-    .cover-main-title {
-      font-family: 'Cinzel', 'Cormorant Garamond', serif;
-      font-size: 15.5pt;
+    .cover-super-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5pt;
       font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: 0.8px;
-      color: #FFFFFF;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin: 0;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-    }
-
-    .cover-main-title span.gold {
-      background: linear-gradient(135deg, #FFF1B8 15%, #E5C158 50%, #C5A059 85%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: block;
-      font-size: 17pt;
+      color: #E2E8F0;
       margin-top: 2px;
     }
 
-    .cover-subtitle {
+    .cover-main-hero-title {
+      font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+      font-size: 17.5pt;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin: 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .cover-main-hero-title span.gold-glow {
+      background: linear-gradient(135deg, #FFF6D0 10%, #E5C158 50%, #C5A059 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      font-size: 19.5pt;
+      margin-top: 2px;
+    }
+
+    .cover-collection-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12pt;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #F8E7A2;
+      text-transform: uppercase;
+    }
+
+    .cover-theme-desc {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 9pt;
+      font-size: 10pt;
       color: #F8E7A2;
-      margin: 0;
-      letter-spacing: 0.5px;
+      margin: 2px 0 0;
+      line-height: 1.25;
+      max-width: 95%;
     }
 
-    .cover-topics-box {
+    /* Core Workshop Modules Showcase */
+    .cover-modules-card {
       width: 100%;
-      background: rgba(6, 21, 45, 0.72);
-      border: 1px solid rgba(229, 193, 88, 0.45);
+      background: rgba(6, 21, 45, 0.85);
+      border: 1.2px solid rgba(229, 193, 88, 0.55);
       border-radius: 6px;
-      padding: 6px 8px;
-      backdrop-filter: blur(4px);
-      box-shadow: inset 0 0 12px rgba(229, 193, 88, 0.08);
-      margin: 1mm 0;
+      padding: 7px 10px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 0 14px rgba(229, 193, 88, 0.1);
     }
 
-    .cover-topics-label {
-      font-size: 6pt;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+    .cover-modules-label {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: #E5C158;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .cover-modules-label::before, .cover-modules-label::after {
+      content: "";
+      width: 16px;
+      height: 1px;
+      background: #E5C158;
     }
 
-    .cover-topics-grid {
+    .cover-modules-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
+      gap: 6px;
     }
 
-    .cover-topic-chip {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(229, 193, 88, 0.3);
+    .cover-module-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(229, 193, 88, 0.35);
       border-radius: 4px;
-      padding: 3px 2px;
-      font-size: 6.2pt;
-      font-weight: 600;
+      padding: 5px 4px;
+      text-align: center;
+    }
+
+    .cover-module-num {
+      font-family: 'Cinzel', serif;
+      font-size: 7pt;
+      font-weight: 700;
+      color: #E5C158;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .cover-module-name {
+      font-size: 7.2pt;
+      font-weight: 700;
       color: #FFFFFF;
       line-height: 1.2;
+      display: block;
     }
 
-    .cover-footer-meta {
+    .cover-module-sub {
+      font-size: 5.8pt;
+      color: #CBD5E1;
+      line-height: 1.15;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Cover Footer Details */
+    .cover-footer-lockup {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       width: 100%;
-      margin-bottom: 1.5mm;
+      margin-bottom: 1mm;
     }
 
-    .cover-meta-badge {
+    .cover-date-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(11, 37, 69, 0.85);
-      border: 1px solid rgba(229, 193, 88, 0.5);
-      border-radius: 4px;
-      padding: 3px 10px;
-      font-size: 6.8pt;
-      font-weight: 600;
+      gap: 7px;
+      background: linear-gradient(135deg, rgba(14, 43, 92, 0.95), rgba(6, 21, 45, 0.95));
+      border: 1.2px solid #E5C158;
+      border-radius: 5px;
+      padding: 4px 14px;
+      font-size: 8.5pt;
+      font-weight: 700;
       color: #F8E7A2;
+      letter-spacing: 0.8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .cover-venue-line {
+      font-size: 7.6pt;
+      font-weight: 600;
+      color: #F1F5F9;
       letter-spacing: 0.5px;
     }
 
-    .cover-venue-text {
-      font-size: 6.5pt;
-      color: #D1D8E2;
-      letter-spacing: 0.5px;
-    }
-
-    .cover-endorsement {
+    .cover-collab-text {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 6.8pt;
+      font-size: 7.8pt;
       color: #C5A059;
-      margin-top: 1px;
     }
+
 
     /* ========================================================
        SHARED EDITORIAL STYLING FOR INSIDE PAGES (2, 3, 4)
+       Optimized to fill the full A5 space with large text
        ======================================================== */
     .panel-editorial {
-      background-color: #FDFBF7;
-      color: #1F2430;
-      padding: 8mm 8mm 7mm 8mm;
+      background-color: #FAF8F4;
+      color: #1A202C;
+      padding: 7mm 7.5mm 6mm 7.5mm;
       justify-content: space-between;
     }
 
-    /* Spine margins to give room for center fold */
     .panel-left-side {
       padding-right: 9mm;
       padding-left: 7mm;
@@ -496,21 +546,21 @@
       padding-right: 7mm;
     }
 
-    .editorial-frame {
+    .editorial-border-frame {
       position: absolute;
       inset: 4.5mm;
-      border: 1px solid #D8C8A8;
+      border: 1.2px solid #D8C8A8;
       pointer-events: none;
       z-index: 1;
     }
-    .editorial-frame::after {
+    .editorial-border-frame::after {
       content: "";
       position: absolute;
       inset: 1.5mm;
-      border: 0.8px solid rgba(197, 160, 89, 0.4);
+      border: 0.8px solid rgba(197, 160, 89, 0.45);
     }
 
-    .editorial-inner-content {
+    .editorial-wrapper {
       position: relative;
       z-index: 5;
       display: flex;
@@ -520,220 +570,259 @@
       width: 100%;
     }
 
-    /* Editorial Header Lockup */
-    .editorial-header {
-      border-bottom: 1.5px solid #06152D;
-      padding-bottom: 3px;
-      margin-bottom: 4px;
+    /* Page Header */
+    .page-header-row {
+      border-bottom: 2px solid #06152D;
+      padding-bottom: 4px;
+      margin-bottom: 5px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
     }
 
-    .editorial-header-titles {
+    .header-titles-col {
       display: flex;
       flex-direction: column;
       gap: 1px;
     }
 
-    .editorial-eyebrow {
-      font-size: 5.8pt;
-      font-weight: 700;
-      letter-spacing: 1.2px;
+    .page-day-eyebrow {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #8C6D23;
     }
 
-    .editorial-page-title {
+    .page-main-heading {
       font-family: 'Cinzel', Georgia, serif;
-      font-size: 9.5pt;
-      font-weight: 700;
-      letter-spacing: 0.6px;
+      font-size: 12pt;
+      font-weight: 800;
+      letter-spacing: 0.5px;
       color: #06152D;
       margin: 0;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
-    .editorial-day-pill {
+    .page-date-badge {
       background: #06152D;
       color: #E5C158;
-      font-size: 5.8pt;
+      font-size: 7.2pt;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 3px;
+      padding: 3px 8px;
+      border-radius: 4px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
-    /* Schedule Tables & Timelines */
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 3px 0;
-      font-size: 6.2pt;
-      line-height: 1.25;
-    }
-
-    .schedule-table tr {
-      border-bottom: 0.8px solid #EAE2D2;
-    }
-    .schedule-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .schedule-table tr.break-row {
-      background: rgba(229, 193, 88, 0.12);
-    }
-
-    .schedule-table tr.highlight-row {
-      background: rgba(6, 21, 45, 0.04);
-      border-left: 2px solid #C5A059;
-    }
-
-    .schedule-table td {
-      padding: 3.2px 4px;
-      vertical-align: top;
-    }
-
-    .time-col {
-      width: 28%;
-      font-weight: 700;
-      color: #06152D;
-      white-space: nowrap;
-      font-feature-settings: "tnum";
-    }
-
-    .desc-col {
-      width: 72%;
-      color: #2D3748;
-    }
-
-    .activity-title {
-      font-weight: 700;
-      color: #06152D;
-      display: block;
-      margin-bottom: 1px;
-    }
-
-    .activity-subtitle {
-      color: #555E6D;
-      font-size: 5.6pt;
-      display: block;
-    }
-
-    .activity-speaker-tag {
-      display: inline-block;
-      margin-top: 1.5px;
-      background: #06152D;
-      color: #F8E7A2;
-      font-size: 5.2pt;
-      font-weight: 600;
-      padding: 1px 4px;
-      border-radius: 2px;
-    }
-
-    /* Dignitaries Mini Grid (for Page 2) */
-    .dignitaries-compact-box {
+    /* Dignitaries Executive Showcase (Page 2) */
+    .dignitaries-executive-container {
       background: #FFFFFF;
-      border: 1px solid #D8C8A8;
-      border-radius: 4px;
-      padding: 4px 6px;
-      margin-bottom: 4px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      border: 1.2px solid #D8C8A8;
+      border-radius: 5px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
-    .dignitaries-title {
-      font-size: 5.5pt;
-      font-weight: 700;
-      letter-spacing: 1px;
+    .dignitaries-heading {
+      font-size: 6.8pt;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #8C6D23;
-      margin-bottom: 3px;
       text-align: center;
-      border-bottom: 0.8px solid #EAE2D2;
-      padding-bottom: 2px;
+      margin-bottom: 4px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid #EAE2D2;
     }
 
-    .dignitaries-grid {
+    .dignitaries-list-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 3px 6px;
+      gap: 4px 8px;
     }
 
-    .dignitary-card {
+    .dignitary-item {
       display: flex;
       flex-direction: column;
     }
 
-    .dignitary-name {
-      font-size: 5.8pt;
+    .dignitary-full-name {
+      font-size: 7.5pt;
       font-weight: 700;
       color: #06152D;
+      line-height: 1.2;
+    }
+
+    .dignitary-office-title {
+      font-size: 6.2pt;
+      font-weight: 500;
+      color: #555E6D;
       line-height: 1.15;
     }
 
-    .dignitary-role {
-      font-size: 5pt;
-      color: #5C6479;
-      line-height: 1.1;
+    .dignitary-librarian-row {
+      grid-column: span 2;
+      border-top: 0.8px solid #EAE2D2;
+      padding-top: 3px;
+      margin-top: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
     }
 
-    /* Editorial Footer */
-    .editorial-footer-bar {
-      border-top: 1px solid #D8C8A8;
-      padding-top: 3px;
+    /* Program Timetable Styling */
+    .timetable-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      justify-content: space-around;
+    }
+
+    .session-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1px solid #E5DCC9;
+      border-radius: 4px;
+      padding: 5px 8px;
+      transition: all 0.2s ease;
+    }
+
+    .session-card.highlight {
+      background: #FFFDF9;
+      border-left: 3.5px solid #C5A059;
+      border-color: #E2D3B8;
+    }
+
+    .session-card.break {
+      background: rgba(229, 193, 88, 0.14);
+      border: 1px dashed rgba(197, 160, 89, 0.6);
+      padding: 4px 8px;
+    }
+
+    .session-card.lunch {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 4px 8px;
+      align-items: center;
+    }
+
+    .session-time-col {
+      flex-shrink: 0;
+      width: 32mm;
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: #06152D;
+      font-feature-settings: "tnum";
+      line-height: 1.2;
+    }
+
+    .session-card.break .session-time-col {
+      color: #8C6D23;
+    }
+
+    .session-info-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .session-event-title {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: #06152D;
+      line-height: 1.2;
+    }
+
+    .session-event-sub {
+      font-size: 6.6pt;
+      color: #4A5568;
+      line-height: 1.2;
+    }
+
+    .session-speaker-tag {
+      display: inline-block;
+      margin-top: 2px;
+      background: #06152D;
+      color: #F8E7A2;
+      font-size: 6pt;
+      font-weight: 600;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    /* Page Footer Bar */
+    .editorial-bottom-bar {
+      border-top: 1.5px solid #D8C8A8;
+      padding-top: 4px;
+      margin-top: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 5.4pt;
-      color: #718096;
-      margin-top: 2px;
+      font-size: 6.5pt;
+      color: #64748B;
     }
 
-    .editorial-page-num {
+    .editorial-page-tag {
       font-family: 'Cinzel', serif;
       font-weight: 700;
+      font-size: 7pt;
       color: #06152D;
     }
 
-    /* Closing Endorsement Box on Back Panel (Day 3) */
-    .closing-signoff-card {
+    /* Culmination & Sign-Off Block (Page 4 / Day 3) */
+    .culmination-signoff-card {
       background: #FFFFFF;
-      border: 1px solid #C5A059;
-      border-radius: 4px;
-      padding: 5px 8px;
+      border: 1.2px solid #C5A059;
+      border-radius: 5px;
+      padding: 7px 10px;
       text-align: center;
-      margin-top: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      margin-top: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
-    .closing-quote {
+    .culmination-quote {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 6.8pt;
+      font-size: 8.5pt;
       color: #06152D;
-      line-height: 1.25;
-      margin-bottom: 3px;
+      line-height: 1.3;
+      margin-bottom: 4px;
     }
 
-    .closing-signatory-name {
+    .culmination-signatory {
       font-family: 'Cinzel', serif;
-      font-size: 6.8pt;
-      font-weight: 700;
+      font-size: 8.2pt;
+      font-weight: 800;
       color: #06152D;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
-    .closing-signatory-title {
-      font-size: 5.2pt;
+    .culmination-role {
+      font-size: 6.5pt;
+      font-weight: 600;
       color: #5C6479;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
+    }
+
+    .culmination-contact-line {
+      font-size: 5.8pt;
+      color: #718096;
+      margin-top: 3px;
+      border-top: 0.8px solid #EAE2D2;
+      padding-top: 2px;
     }
 
     /* ========================================================
-       PRINT MEDIA QUERIES (FLAWLESS DUPLEX 1-SHEET RENDERING)
+       PRINT MEDIA OPTIMIZATION
        ======================================================== */
     @media print {
       body {
@@ -758,9 +847,8 @@
         display: none !important;
       }
 
-      /* Keep faint fold crease for precise bifold alignment */
       .fold-crease-guide {
-        border-left: 0.8px dashed rgba(197, 160, 89, 0.4) !important;
+        border-left: 0.8px dashed rgba(197, 160, 89, 0.45) !important;
       }
     }
   </style>
@@ -772,11 +860,11 @@
        ======================================================== -->
   <div class="toolbar-container">
     <div class="toolbar-title">
-      <div style="display: flex; align-items: center;">
-        <h1>PPCL Official Event Program</h1>
+      <h1>
+        PPCL Event Program &amp; Schedule
         <span class="toolbar-badge">1 A4 Sheet • Back-to-Back Duplex</span>
-      </div>
-      <p>November 4–6, 2026 • Puerto Princesa City Library • Interactive Live Template</p>
+      </h1>
+      <p>November 4–6, 2026 • Puerto Princesa City Library • Maximized Spacing &amp; Readability</p>
     </div>
     <div class="toolbar-actions">
       <a href="index.html" class="toolbar-btn toolbar-btn-secondary">
@@ -794,11 +882,11 @@
     </div>
   </div>
 
-  <!-- Print Instruction Banner -->
+  <!-- Print Instructions Alert -->
   <div class="print-tip-banner">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#E5C158"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
     <div>
-      <strong>How to print on 1 single sheet of A4 paper:</strong> Click <strong>Print</strong> above (or press <code>Ctrl + P</code>). In print dialog, select <strong>Paper: A4</strong>, <strong>Orientation: Landscape</strong>, <strong>Margins: None</strong>, and choose <strong>Print on both sides (Flip on Short Edge)</strong>. When printed, simply fold in half down the center spine line!
+      <strong>How to print on 1 single sheet of A4 paper:</strong> Click <strong>Print</strong> above (or press <code>Ctrl + P</code>). In print dialog, select <strong>Paper: A4</strong>, <strong>Orientation: Landscape</strong>, <strong>Margins: None</strong>, and choose <strong>Print on both sides (Flip on Short Edge)</strong>. When printed, simply fold down the center dashed guide line!
     </div>
   </div>
 
@@ -812,110 +900,117 @@
     
     <!-- Spine fold guide -->
     <div class="fold-crease-guide"></div>
-    <div class="fold-notch-top">Fold Crease</div>
-    <div class="fold-notch-bottom">Fold Crease</div>
+    <div class="fold-notch-top">Center Fold Crease</div>
+    <div class="fold-notch-bottom">Center Fold Crease</div>
 
     <!-- ----------------------------------------------------
          SHEET 1 - LEFT PANEL: BACK COVER (PAGE 4: DAY 3)
          ---------------------------------------------------- -->
     <div class="bifold-panel panel-editorial panel-left-side" id="panel-day3">
-      <div class="editorial-frame"></div>
+      <div class="editorial-border-frame"></div>
       
-      <div class="editorial-inner-content">
+      <div class="editorial-wrapper">
         <!-- Header -->
-        <div class="editorial-header">
-          <div class="editorial-header-titles">
-            <span class="editorial-eyebrow" contenteditable="true">Day 3 of 3 • Culmination</span>
-            <h2 class="editorial-page-title" contenteditable="true">Output Presentation &amp; Closing</h2>
+        <div class="page-header-row">
+          <div class="header-titles-col">
+            <span class="page-day-eyebrow" contenteditable="true">Day 3 of 3 • Culmination Activities</span>
+            <h2 class="page-main-heading" contenteditable="true">Output Presentation &amp; Closing</h2>
           </div>
-          <span class="editorial-day-pill" contenteditable="true">Friday • Nov 6</span>
+          <span class="page-date-badge" contenteditable="true">Friday • Nov 6</span>
         </div>
 
-        <!-- Schedule Flow -->
-        <table class="schedule-table">
-          <tbody>
-            <tr>
-              <td class="time-col" contenteditable="true">8:00 – 8:30 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Registration &amp; Attendance</span>
-                <span class="activity-subtitle" contenteditable="true">Secretariat verification &amp; materials distribution</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="time-col" contenteditable="true">8:30 – 9:00 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Recap of Day 2 &amp; Day 3 Overview</span>
-                <span class="activity-subtitle" contenteditable="true">Reflections on binding techniques &amp; daily agenda</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">9:00 – 10:00 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Presentation of Outputs — Part I</span>
-                <span class="activity-subtitle" contenteditable="true">Participants present sewn single-sheet &amp; bound book models</span>
-                <span class="activity-speaker-tag" contenteditable="true">Facilitators &amp; NLP Resource Persons</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">10:00 – 10:30 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Health Break</span>
-                <span class="activity-subtitle" contenteditable="true">Morning Refreshments</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">10:30 AM – 12:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Continuation of Output Presentations</span>
-                <span class="activity-subtitle" contenteditable="true">Softbound newspaper binding exhibits &amp; group defense</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">12:00 – 1:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Lunch Break</span>
-                <span class="activity-subtitle" contenteditable="true">Buffet &amp; informal networking</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">1:00 – 3:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Final Output Critiquing &amp; Assessment</span>
-                <span class="activity-subtitle" contenteditable="true">Expert evaluation of durability, aesthetics, &amp; archival safety</span>
-                <span class="activity-speaker-tag" contenteditable="true">NLP Resource Speakers</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">3:00 – 3:30 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Health Break</span>
-                <span class="activity-subtitle" contenteditable="true">Afternoon Refreshments</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">3:30 – 5:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Evaluation, Awarding &amp; Closing Ceremonies</span>
-                <span class="activity-subtitle" contenteditable="true">Post-Test, Workshop Feedback, Awarding of Certificates of Participation &amp; Appearance</span>
-                <span class="activity-speaker-tag" contenteditable="true">City Librarian &amp; NLP Guests</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Closing Endorsement Box -->
-        <div class="closing-signoff-card">
-          <div class="closing-quote" contenteditable="true">
-            "Preserving our documentary heritage guarantees that future generations will know their history and safeguard their identity."
+        <!-- Full Height Timetable Flow -->
+        <div class="timetable-container">
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">8:00 – 8:30 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Registration &amp; Attendance</span>
+              <span class="session-event-sub" contenteditable="true">Secretariat verification &amp; materials submission</span>
+            </div>
           </div>
-          <div class="closing-signatory-name" contenteditable="true">JOYMARIE M. OLAPE, RL</div>
-          <div class="closing-signatory-title" contenteditable="true">City Librarian • Puerto Princesa City Library</div>
+
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">8:30 – 9:00 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Recap of Day 2 &amp; Overview of Day 3</span>
+              <span class="session-event-sub" contenteditable="true">Reflections on binding techniques &amp; presentation rubric</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">9:00 – 10:00 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Presentation of Outputs — Part I</span>
+              <span class="session-event-sub" contenteditable="true">Delegates present hand-sewn single-sheet &amp; hardbound book models</span>
+              <span class="session-speaker-tag" contenteditable="true">Facilitators &amp; NLP Resource Persons</span>
+            </div>
+          </div>
+
+          <div class="session-card break">
+            <div class="session-time-col" contenteditable="true">10:00 – 10:30 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Health Break</span>
+              <span class="session-event-sub" contenteditable="true">Morning Refreshments &amp; Informal Peer Review</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">10:30 AM – 12:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Continuation of Output Presentations</span>
+              <span class="session-event-sub" contenteditable="true">Softbound newspaper binding exhibits &amp; group defense</span>
+            </div>
+          </div>
+
+          <div class="session-card lunch">
+            <div class="session-time-col" contenteditable="true">12:00 – 1:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Lunch Break</span>
+              <span class="session-event-sub" contenteditable="true">Buffet &amp; Workstation Clearing</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">1:00 – 3:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Final Output Critiquing &amp; Assessment</span>
+              <span class="session-event-sub" contenteditable="true">Expert evaluation of durability, aesthetics, &amp; archival safety</span>
+              <span class="session-speaker-tag" contenteditable="true">NLP Resource Speakers</span>
+            </div>
+          </div>
+
+          <div class="session-card break">
+            <div class="session-time-col" contenteditable="true">3:00 – 3:30 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Health Break</span>
+              <span class="session-event-sub" contenteditable="true">Afternoon Refreshments</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight" style="border-left-color: #06152D; background: #F6F8FC;">
+            <div class="session-time-col" contenteditable="true">3:30 – 5:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Evaluation &amp; Distribution of Certificates</span>
+              <span class="session-event-sub" contenteditable="true">Post-Test, Workshop Feedback, Awarding of Certificates of Participation &amp; Appearance</span>
+              <span class="session-speaker-tag" contenteditable="true" style="background:#8C6D23;">City Librarian &amp; NLP Guests</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Closing Endorsement & Culmination Card -->
+        <div class="culmination-signoff-card">
+          <div class="culmination-quote" contenteditable="true">
+            "Preserving our written records safeguards our historical truth, community memory, and cultural identity."
+          </div>
+          <div class="culmination-signatory" contenteditable="true">JOYMARIE M. OLAPE, RL</div>
+          <div class="culmination-role" contenteditable="true">City Librarian • Puerto Princesa City Library</div>
+          <div class="culmination-contact-line" contenteditable="true">Puerto Princesa City Library • City Hall Complex, Sta. Monica, Puerto Princesa City</div>
         </div>
 
         <!-- Footer Bar -->
-        <div class="editorial-footer-bar">
+        <div class="editorial-bottom-bar">
           <span contenteditable="true">Puerto Princesa City Library</span>
-          <span class="editorial-page-num" contenteditable="true">Page 4 • Day 3</span>
+          <span class="editorial-page-tag" contenteditable="true">Page 4 • Culmination</span>
         </div>
       </div>
     </div>
@@ -927,19 +1022,19 @@
     <div class="bifold-panel panel-cover panel-right-side" id="panel-cover">
       <!-- Backdrop Texture -->
       <img src="shared/bg_archival_tarp.jpg" alt="Archival Texture" class="cover-backdrop-img" />
-      <div class="cover-editorial-scrim"></div>
+      <div class="cover-scrim"></div>
 
-      <!-- Architectural Corner Accents -->
-      <div class="cover-border"></div>
+      <!-- Architectural Frame Borders -->
+      <div class="cover-frame-border"></div>
       <div class="cover-corner cover-corner-tl"></div>
       <div class="cover-corner cover-corner-tr"></div>
       <div class="cover-corner cover-corner-bl"></div>
       <div class="cover-corner cover-corner-br"></div>
 
       <div class="cover-content">
-        <!-- Top Logos and Institutional Eyebrow -->
-        <div class="cover-header-lockup">
-          <div class="cover-seals-row">
+        <!-- Top Header Lockup with Seals -->
+        <div class="cover-header-group">
+          <div class="cover-seals-flex">
             <div class="cover-seal-circle">
               <img src="logo/Puerto_Princesa_city_seal.svg.png" alt="City Seal" />
             </div>
@@ -950,58 +1045,64 @@
               <img src="logo/BAGONG-PILIPINAS-LOGO-1-1.png" alt="Bagong Pilipinas" />
             </div>
           </div>
-          <div class="cover-org-eyebrow" contenteditable="true">City Government of Puerto Princesa</div>
-          <div class="cover-org-sub" contenteditable="true">Puerto Princesa City Library • National Library of the Philippines</div>
+          <div class="cover-republic-text" contenteditable="true">Republic of the Philippines • City of Puerto Princesa</div>
+          <div class="cover-office-sub" contenteditable="true">Puerto Princesa City Library • National Library of the Philippines</div>
           
-          <div class="cover-divider-flourish">
+          <div class="cover-divider-rule">
             <span class="line"></span>
             <span class="diamond"></span>
             <span class="line"></span>
           </div>
         </div>
 
-        <!-- Main Title Lockup -->
+        <!-- Main Title Group -->
         <div class="cover-title-group">
-          <div class="cover-program-badge" contenteditable="true">Official Event Program</div>
+          <div class="cover-badge-pill" contenteditable="true">Official Event Program</div>
+          <div class="cover-super-title" contenteditable="true">Training-Workshop on</div>
           
-          <h1 class="cover-main-title">
-            <span contenteditable="true">Training-Workshop on</span>
-            <span class="gold" contenteditable="true">Basic Preservation &amp; Conservation</span>
-            <span contenteditable="true" style="font-size: 11pt; letter-spacing: 1.2px; font-weight: 600;">of Paper-Based Collections</span>
+          <h1 class="cover-main-hero-title">
+            <span class="gold-glow" contenteditable="true">Basic Preservation &amp; Conservation</span>
           </h1>
+          <div class="cover-collection-title" contenteditable="true">of Paper-Based Collections</div>
 
-          <p class="cover-subtitle" contenteditable="true">
-            Empowering Custodians of Heritage: Traditional Book Binding, Enclosures &amp; Archival Care
+          <p class="cover-theme-desc" contenteditable="true">
+            Empowering Custodians of Heritage: Traditional Book Binding, Archival Enclosures &amp; Care
           </p>
         </div>
 
-        <!-- 3 Core Workshop Topics -->
-        <div class="cover-topics-box">
-          <div class="cover-topics-label" contenteditable="true">Core Workshop Practical Topics</div>
-          <div class="cover-topics-grid">
-            <div class="cover-topic-chip" contenteditable="true">
-              <strong>I. Book Binding</strong><br/>Single &amp; Basic Stitch
+        <!-- 3 Core Workshop Topics (Prominent Feature Cards) -->
+        <div class="cover-modules-card">
+          <div class="cover-modules-label" contenteditable="true">Hands-On Workshop Topics</div>
+          <div class="cover-modules-grid">
+            <div class="cover-module-item">
+              <span class="cover-module-num" contenteditable="true">TOPIC I</span>
+              <span class="cover-module-name" contenteditable="true">Book Binding</span>
+              <span class="cover-module-sub" contenteditable="true">Single &amp; Basic Stitching</span>
             </div>
-            <div class="cover-topic-chip" contenteditable="true">
-              <strong>II. Book Enclosure</strong><br/>Archival Phase Box
+            <div class="cover-module-item">
+              <span class="cover-module-num" contenteditable="true">TOPIC II</span>
+              <span class="cover-module-name" contenteditable="true">Book Enclosure</span>
+              <span class="cover-module-sub" contenteditable="true">Archival Phase Box</span>
             </div>
-            <div class="cover-topic-chip" contenteditable="true">
-              <strong>III. Newspaper Binding</strong><br/>Soft Bound Volume
+            <div class="cover-module-item">
+              <span class="cover-module-num" contenteditable="true">TOPIC III</span>
+              <span class="cover-module-name" contenteditable="true">Newspaper Binding</span>
+              <span class="cover-module-sub" contenteditable="true">Soft Bound Volume</span>
             </div>
           </div>
         </div>
 
         <!-- Date & Venue Metadata Footer -->
-        <div class="cover-footer-meta">
-          <div class="cover-meta-badge" contenteditable="true">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div class="cover-footer-lockup">
+          <div class="cover-date-pill" contenteditable="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             November 4–6, 2026
           </div>
-          <div class="cover-venue-text" contenteditable="true">
+          <div class="cover-venue-line" contenteditable="true">
             Puerto Princesa City Library • Puerto Princesa City, Palawan
           </div>
-          <div class="cover-endorsement" contenteditable="true">
-            In partnership with the National Library of the Philippines (NLP)
+          <div class="cover-collab-text" contenteditable="true">
+            In Joint Cooperation with the National Library of the Philippines (NLP)
           </div>
         </div>
       </div>
@@ -1018,114 +1119,118 @@
 
     <!-- Spine fold guide -->
     <div class="fold-crease-guide"></div>
-    <div class="fold-notch-top">Fold Crease</div>
-    <div class="fold-notch-bottom">Fold Crease</div>
+    <div class="fold-notch-top">Center Fold Crease</div>
+    <div class="fold-notch-bottom">Center Fold Crease</div>
 
     <!-- ----------------------------------------------------
          SHEET 2 - LEFT PANEL: INSIDE LEFT (PAGE 2: DAY 1)
          ---------------------------------------------------- -->
     <div class="bifold-panel panel-editorial panel-left-side" id="panel-day1">
-      <div class="editorial-frame"></div>
+      <div class="editorial-border-frame"></div>
 
-      <div class="editorial-inner-content">
+      <div class="editorial-wrapper">
         <!-- Header -->
-        <div class="editorial-header">
-          <div class="editorial-header-titles">
-            <span class="editorial-eyebrow" contenteditable="true">Day 1 of 3 • Preliminaries &amp; Foundation</span>
-            <h2 class="editorial-page-title" contenteditable="true">Dignitaries &amp; Day 1 Flow</h2>
+        <div class="page-header-row">
+          <div class="header-titles-col">
+            <span class="page-day-eyebrow" contenteditable="true">Day 1 of 3 • Preliminaries &amp; Foundation</span>
+            <h2 class="page-main-heading" contenteditable="true">Dignitaries &amp; Day 1 Flow</h2>
           </div>
-          <span class="editorial-day-pill" contenteditable="true">Wednesday • Nov 4</span>
+          <span class="page-date-badge" contenteditable="true">Wednesday • Nov 4</span>
         </div>
 
-        <!-- Dignitaries & Speakers Lineup -->
-        <div class="dignitaries-compact-box">
-          <div class="dignitaries-title" contenteditable="true">Resource Speakers &amp; Event Dignitaries</div>
-          <div class="dignitaries-grid">
-            <div class="dignitary-card">
-              <span class="dignitary-name" contenteditable="true">Alexander B. Vetus</span>
-              <span class="dignitary-role" contenteditable="true">Resource Speaker • Admin Asst III, NLP</span>
+        <!-- Dignitaries Executive Showcase -->
+        <div class="dignitaries-executive-container">
+          <div class="dignitaries-heading" contenteditable="true">Resource Speakers &amp; Event Dignitaries</div>
+          <div class="dignitaries-list-grid">
+            <div class="dignitary-item">
+              <span class="dignitary-full-name" contenteditable="true">Alexander B. Vetus</span>
+              <span class="dignitary-office-title" contenteditable="true">Resource Speaker • Admin Asst III, NLP</span>
             </div>
-            <div class="dignitary-card">
-              <span class="dignitary-name" contenteditable="true">Genkie P. Albano</span>
-              <span class="dignitary-role" contenteditable="true">Resource Speaker • Admin Asst III, NLP</span>
+            <div class="dignitary-item">
+              <span class="dignitary-full-name" contenteditable="true">Genkie P. Albano</span>
+              <span class="dignitary-office-title" contenteditable="true">Resource Speaker • Admin Asst III, NLP</span>
             </div>
-            <div class="dignitary-card">
-              <span class="dignitary-name" contenteditable="true">Geraldine T. Francia, RL</span>
-              <span class="dignitary-role" contenteditable="true">Guest Speaker • Librarian III, NLP</span>
+            <div class="dignitary-item">
+              <span class="dignitary-full-name" contenteditable="true">Geraldine T. Francia, RL</span>
+              <span class="dignitary-office-title" contenteditable="true">Guest Speaker • Librarian III, NLP</span>
             </div>
-            <div class="dignitary-card">
-              <span class="dignitary-name" contenteditable="true">Don Angel Lou M. Salvatierra</span>
-              <span class="dignitary-role" contenteditable="true">Program Emcee • Admin Asst I, PPCL</span>
+            <div class="dignitary-item">
+              <span class="dignitary-full-name" contenteditable="true">Don Angel Lou M. Salvatierra</span>
+              <span class="dignitary-office-title" contenteditable="true">Program Emcee • Admin Asst I, PPCL</span>
             </div>
-            <div class="dignitary-card" style="grid-column: span 2; border-top: 0.5px solid #EAE2D2; padding-top: 1.5px; margin-top: 1px;">
-              <span class="dignitary-name" contenteditable="true">Joymarie M. Olape, RL</span>
-              <span class="dignitary-role" contenteditable="true">Opening &amp; Closing Remarks • City Librarian, PPCL</span>
+            <div class="dignitary-librarian-row">
+              <span class="dignitary-full-name" contenteditable="true">Joymarie M. Olape, RL</span>
+              <span class="dignitary-office-title" contenteditable="true">Opening &amp; Closing Remarks • City Librarian, PPCL</span>
             </div>
           </div>
         </div>
 
-        <!-- Day 1 Schedule Flow -->
-        <table class="schedule-table">
-          <tbody>
-            <tr>
-              <td class="time-col" contenteditable="true">1:15 – 1:30 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Registration &amp; Attendance</span>
-                <span class="activity-subtitle" contenteditable="true">Secretariat check-in &amp; kits distribution</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="time-col" contenteditable="true">1:30 – 1:35 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Doxology &amp; National Anthem</span>
-                <span class="activity-subtitle" contenteditable="true">Solemn invocation &amp; Philippine National Anthem</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="time-col" contenteditable="true">1:35 – 1:40 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Welcome Remarks</span>
-                <span class="activity-subtitle" contenteditable="true">Welcome address to delegates and resource guests</span>
-                <span class="activity-speaker-tag" contenteditable="true">Ms. Joymarie M. Olape, RL</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">1:40 – 3:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Basic &amp; Practical Tips on Conservation</span>
-                <span class="activity-subtitle" contenteditable="true">Fundamental principles, environmental controls, pest management, and archival handling</span>
-                <span class="activity-speaker-tag" contenteditable="true">NLP Resource Speakers</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">3:00 – 3:30 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Health Break</span>
-                <span class="activity-subtitle" contenteditable="true">Afternoon Refreshments</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">3:30 – 4:30 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Hands-On Care &amp; Paper Restoration</span>
-                <span class="activity-subtitle" contenteditable="true">Mending, encapsulation of loose paper, fastener/clip removal, and dry cleaning</span>
-                <span class="activity-speaker-tag" contenteditable="true">NLP Facilitators</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="time-col" contenteditable="true">4:30 – 5:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Administrative Reminders &amp; End of Day 1</span>
-                <span class="activity-subtitle" contenteditable="true">Preparation of tools &amp; materials for Day 2 binding workshops</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- Full Height Timetable Flow -->
+        <div class="timetable-container">
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">1:15 – 1:30 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Registration &amp; Attendance of Participants</span>
+              <span class="session-event-sub" contenteditable="true">Secretariat check-in &amp; workshop kits distribution</span>
+            </div>
+          </div>
+
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">1:30 – 1:35 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Doxology &amp; National Anthem</span>
+              <span class="session-event-sub" contenteditable="true">Solemn invocation &amp; Philippine National Anthem</span>
+            </div>
+          </div>
+
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">1:35 – 1:40 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Welcome Remarks</span>
+              <span class="session-event-sub" contenteditable="true">Opening address to library custodians and guests</span>
+              <span class="session-speaker-tag" contenteditable="true">Ms. Joymarie M. Olape, RL</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">1:40 – 3:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Basic &amp; Practical Tips on Conservation</span>
+              <span class="session-event-sub" contenteditable="true">Environmental factors, paper deterioration, handling protocols, and IPM</span>
+              <span class="session-speaker-tag" contenteditable="true">NLP Resource Speakers</span>
+            </div>
+          </div>
+
+          <div class="session-card break">
+            <div class="session-time-col" contenteditable="true">3:00 – 3:30 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Health Break</span>
+              <span class="session-event-sub" contenteditable="true">Afternoon Refreshments &amp; Interaction</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">3:30 – 4:30 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Paper Restoration &amp; Cleaning Practicum</span>
+              <span class="session-event-sub" contenteditable="true">Mending, encapsulation of loose paper, fastener/clip removal, and dry cleaning</span>
+              <span class="session-speaker-tag" contenteditable="true">NLP Facilitators</span>
+            </div>
+          </div>
+
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">4:30 – 5:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Administrative Announcements &amp; End of Day 1</span>
+              <span class="session-event-sub" contenteditable="true">Briefing and materials preparation for Day 2 hands-on workshops</span>
+            </div>
+          </div>
+        </div>
 
         <!-- Footer Bar -->
-        <div class="editorial-footer-bar">
-          <span contenteditable="true">Training-Workshop on Conservation</span>
-          <span class="editorial-page-num" contenteditable="true">Page 2 • Day 1</span>
+        <div class="editorial-bottom-bar">
+          <span contenteditable="true">PPCL Training-Workshop 2026</span>
+          <span class="editorial-page-tag" contenteditable="true">Page 2 • Foundation</span>
         </div>
       </div>
     </div>
@@ -1135,99 +1240,99 @@
          SHEET 2 - RIGHT PANEL: INSIDE RIGHT (PAGE 3: DAY 2)
          ---------------------------------------------------- -->
     <div class="bifold-panel panel-editorial panel-right-side" id="panel-day2">
-      <div class="editorial-frame"></div>
+      <div class="editorial-border-frame"></div>
 
-      <div class="editorial-inner-content">
+      <div class="editorial-wrapper">
         <!-- Header -->
-        <div class="editorial-header">
-          <div class="editorial-header-titles">
-            <span class="editorial-eyebrow" contenteditable="true">Day 2 of 3 • Intensive Practicum</span>
-            <h2 class="editorial-page-title" contenteditable="true">Hands-On Binding Workshops</h2>
+        <div class="page-header-row">
+          <div class="header-titles-col">
+            <span class="page-day-eyebrow" contenteditable="true">Day 2 of 3 • Intensive Practicum</span>
+            <h2 class="page-main-heading" contenteditable="true">Hands-On Binding Workshops</h2>
           </div>
-          <span class="editorial-day-pill" contenteditable="true">Thursday • Nov 5</span>
+          <span class="page-date-badge" contenteditable="true">Thursday • Nov 5</span>
         </div>
 
-        <!-- Schedule Flow -->
-        <table class="schedule-table">
-          <tbody>
-            <tr>
-              <td class="time-col" contenteditable="true">8:00 – 8:30 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Registration &amp; Attendance</span>
-                <span class="activity-subtitle" contenteditable="true">Arrival of participants &amp; workstation prep</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="time-col" contenteditable="true">8:30 – 9:00 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Recap of Day 1 &amp; Day 2 Overview</span>
-                <span class="activity-subtitle" contenteditable="true">Synthesis of paper restoration basics &amp; workshop objectives</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">9:00 – 10:00 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Workshop 1: Book Binding</span>
-                <span class="activity-subtitle" contenteditable="true">Single &amp; Basic Stitch technique, signature folding, and awl punching</span>
-                <span class="activity-speaker-tag" contenteditable="true">Resource Speaker: Mr. Alexander B. Vetus</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">10:00 – 10:30 AM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Health Break</span>
-                <span class="activity-subtitle" contenteditable="true">Morning Refreshments</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">10:30 AM – 12:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Continuation of Workshop 1</span>
-                <span class="activity-subtitle" contenteditable="true">Hands-on sewing, endpaper attachment, spine trimming, and pressing</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">12:00 – 1:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Lunch Break</span>
-                <span class="activity-subtitle" contenteditable="true">Buffet &amp; workstation resets</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">1:00 – 3:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Workshop 2: Newspaper Binding</span>
-                <span class="activity-subtitle" contenteditable="true">Softbound technique: collation, spine lining, adhesive application, and paper reinforcement</span>
-                <span class="activity-speaker-tag" contenteditable="true">Resource Speaker: Mr. Genkie P. Albano</span>
-              </td>
-            </tr>
-            <tr class="break-row">
-              <td class="time-col" contenteditable="true">3:00 – 3:30 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Health Break</span>
-                <span class="activity-subtitle" contenteditable="true">Afternoon Refreshments</span>
-              </td>
-            </tr>
-            <tr class="highlight-row">
-              <td class="time-col" contenteditable="true">3:30 – 5:00 PM</td>
-              <td class="desc-col">
-                <span class="activity-title" contenteditable="true">Continuation of Workshop 2</span>
-                <span class="activity-subtitle" contenteditable="true">Soft cover assembly, trimming, labeling, and quality assessment</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- Full Height Timetable Flow -->
+        <div class="timetable-container">
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">8:00 – 8:30 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Registration &amp; Attendance</span>
+              <span class="session-event-sub" contenteditable="true">Participant roll-call &amp; workstation tool inspection</span>
+            </div>
+          </div>
 
-        <!-- Practical Workshop Advisory Note -->
-        <div style="background: rgba(11, 37, 69, 0.04); border-left: 2px solid #06152D; padding: 4px 6px; border-radius: 2px; margin-top: 3px;">
-          <span style="font-size: 5.5pt; font-weight: 700; color: #06152D; text-transform: uppercase;">Workshop Reminder:</span>
-          <span style="font-size: 5.2pt; color: #4A5568; display: block;">Participants are reminded to handle cutting tools, bone folders, and adhesives with care under facilitator supervision.</span>
+          <div class="session-card">
+            <div class="session-time-col" contenteditable="true">8:30 – 9:00 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Recap of Day 1 &amp; Overview of Day 2</span>
+              <span class="session-event-sub" contenteditable="true">Summary of cleaning fundamentals &amp; workshop safety rules</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">9:00 – 10:00 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Workshop 1: Book Binding (Single &amp; Basic Stitch)</span>
+              <span class="session-event-sub" contenteditable="true">Signature folding, hole piercing, linen thread sewing, and kettle stitches</span>
+              <span class="session-speaker-tag" contenteditable="true">Resource Speaker: Mr. Alexander B. Vetus</span>
+            </div>
+          </div>
+
+          <div class="session-card break">
+            <div class="session-time-col" contenteditable="true">10:00 – 10:30 AM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Health Break</span>
+              <span class="session-event-sub" contenteditable="true">Morning Refreshments</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">10:30 AM – 12:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Continuation of Workshop 1</span>
+              <span class="session-event-sub" contenteditable="true">Spine lining, endpaper attachment, board casing, and initial pressing</span>
+            </div>
+          </div>
+
+          <div class="session-card lunch">
+            <div class="session-time-col" contenteditable="true">12:00 – 1:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Lunch Break</span>
+              <span class="session-event-sub" contenteditable="true">Buffet &amp; Workstation Reset</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">1:00 – 3:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Workshop 2: Newspaper Binding (Softbound)</span>
+              <span class="session-event-sub" contenteditable="true">Serial collation, spine adhesive application, reinforcing fabric &amp; soft cover</span>
+              <span class="session-speaker-tag" contenteditable="true">Resource Speaker: Mr. Genkie P. Albano</span>
+            </div>
+          </div>
+
+          <div class="session-card break">
+            <div class="session-time-col" contenteditable="true">3:00 – 3:30 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Health Break</span>
+              <span class="session-event-sub" contenteditable="true">Afternoon Refreshments</span>
+            </div>
+          </div>
+
+          <div class="session-card highlight">
+            <div class="session-time-col" contenteditable="true">3:30 – 5:00 PM</div>
+            <div class="session-info-col">
+              <span class="session-event-title" contenteditable="true">Continuation of Workshop 2</span>
+              <span class="session-event-sub" contenteditable="true">Precision trimming, label placement, final inspection, and overnight curing</span>
+            </div>
+          </div>
         </div>
 
         <!-- Footer Bar -->
-        <div class="editorial-footer-bar">
+        <div class="editorial-bottom-bar">
           <span contenteditable="true">Puerto Princesa City Library</span>
-          <span class="editorial-page-num" contenteditable="true">Page 3 • Day 2</span>
+          <span class="editorial-page-tag" contenteditable="true">Page 3 • Practicum</span>
         </div>
       </div>
     </div>
