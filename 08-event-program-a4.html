@@ -237,7 +237,7 @@
     .cover-frame-border {
       position: absolute;
       inset: 4.5mm;
-      border: 1.5px solid rgba(229, 193, 88, 0.6);
+      border: 1.5px solid rgba(229, 193, 88, 0.65);
       pointer-events: none;
       z-index: 4;
     }
@@ -245,20 +245,56 @@
       content: "";
       position: absolute;
       inset: 2mm;
-      border: 1.8px solid rgba(229, 193, 88, 0.85);
+      border: 1px solid rgba(229, 193, 88, 0.4);
+    }
+    .cover-frame-border::after {
+      content: "";
+      position: absolute;
+      inset: 3.5mm;
+      border: 0.6px dashed rgba(229, 193, 88, 0.35);
+    }
+
+    /* Side Architectural Guidelines */
+    .cover-side-accent-left, .cover-side-accent-right {
+      position: absolute;
+      top: 25mm;
+      bottom: 25mm;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(229, 193, 88, 0.45) 15%, rgba(229, 193, 88, 0.45) 85%, transparent 100%);
+      z-index: 4;
+      pointer-events: none;
+    }
+    .cover-side-accent-left { left: 7.5mm; }
+    .cover-side-accent-right { right: 7.5mm; }
+
+    /* Center Crest Watermark */
+    .cover-crest-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90mm;
+      height: 90mm;
+      opacity: 0.055;
+      z-index: 2;
+      pointer-events: none;
     }
 
     .cover-corner {
       position: absolute;
-      width: 16mm;
-      height: 16mm;
+      width: 20mm;
+      height: 20mm;
       z-index: 5;
       pointer-events: none;
     }
-    .cover-corner-tl { top: 5.5mm; left: 5.5mm; border-top: 2.5px solid #E5C158; border-left: 2.5px solid #E5C158; }
-    .cover-corner-tr { top: 5.5mm; right: 5.5mm; border-top: 2.5px solid #E5C158; border-right: 2.5px solid #E5C158; }
-    .cover-corner-bl { bottom: 5.5mm; left: 5.5mm; border-bottom: 2.5px solid #E5C158; border-left: 2.5px solid #E5C158; }
-    .cover-corner-br { bottom: 5.5mm; right: 5.5mm; border-bottom: 2.5px solid #E5C158; border-right: 2.5px solid #E5C158; }
+    .cover-corner svg {
+      width: 100%;
+      height: 100%;
+    }
+    .cover-corner-tl { top: 4.5mm; left: 4.5mm; }
+    .cover-corner-tr { top: 4.5mm; right: 4.5mm; transform: scaleX(-1); }
+    .cover-corner-bl { bottom: 4.5mm; left: 4.5mm; transform: scaleY(-1); }
+    .cover-corner-br { bottom: 4.5mm; right: 4.5mm; transform: scale(-1, -1); }
 
     .cover-content {
       position: relative;
@@ -491,9 +527,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       width: 100%;
-      margin-bottom: 1mm;
+      margin-bottom: 1.5mm;
     }
 
     .cover-date-pill {
@@ -518,11 +554,34 @@
       letter-spacing: 0.5px;
     }
 
-    .cover-collab-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 7.8pt;
-      color: #C5A059;
+    .cover-bottom-flourish {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 75%;
+      margin: 2px 0 1px;
+    }
+    .cover-bottom-flourish .flourish-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.75), transparent);
+    }
+    .cover-bottom-flourish .flourish-gem {
+      width: 5px;
+      height: 5px;
+      background: #E5C158;
+      transform: rotate(45deg);
+    }
+
+    .cover-heritage-mark {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 5.8pt;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(229, 193, 88, 0.85);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
     }
 
 
@@ -1009,12 +1068,70 @@
       <img src="shared/bg_archival_tarp.jpg" alt="Archival Texture" class="cover-backdrop-img" />
       <div class="cover-scrim"></div>
 
+      <!-- Watermark Archival Crest -->
+      <div class="cover-crest-watermark">
+        <svg viewBox="0 0 200 200" fill="none" stroke="#E5C158">
+          <circle cx="100" cy="100" r="90" stroke-width="1.2" stroke-dasharray="4 4" />
+          <circle cx="100" cy="100" r="82" stroke-width="1.8" />
+          <path d="M60 140c20-10 40 5 40 5s20-15 40-5v-60c-20-10-40 5-40 5s-20-15-40-5z" stroke-width="2.5" />
+          <path d="M100 85v60" stroke-width="2.5" />
+          <path d="M70 70l60 60M130 70l-60 60" stroke-width="0.8" stroke-dasharray="2 2" />
+          <polygon points="100,30 104,40 114,40 106,46 109,56 100,50 91,56 94,46 86,40 96,40" fill="#E5C158" />
+        </svg>
+      </div>
+
+      <!-- Side Architectural Guidelines -->
+      <div class="cover-side-accent-left"></div>
+      <div class="cover-side-accent-right"></div>
+
       <!-- Architectural Frame Borders -->
       <div class="cover-frame-border"></div>
-      <div class="cover-corner cover-corner-tl"></div>
-      <div class="cover-corner cover-corner-tr"></div>
-      <div class="cover-corner cover-corner-bl"></div>
-      <div class="cover-corner cover-corner-br"></div>
+
+      <!-- Ornate SVG Filigree Corners -->
+      <div class="cover-corner cover-corner-tl">
+        <svg viewBox="0 0 80 80" fill="none">
+          <path d="M4 4h32c16 0 28 12 28 28v32" stroke="#E5C158" stroke-width="1.8" />
+          <path d="M10 10h22c10 0 18 8 18 18v22" stroke="#E5C158" stroke-width="1" stroke-dasharray="2.5 2.5" />
+          <circle cx="64" cy="64" r="2.5" fill="#E5C158" />
+          <circle cx="4" cy="4" r="2.5" fill="#E5C158" />
+          <path d="M4 18c8 0 14 6 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <path d="M18 4c0 8 6 14 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <polygon points="20,20 23,17 26,20 23,23" fill="#E5C158" />
+        </svg>
+      </div>
+      <div class="cover-corner cover-corner-tr">
+        <svg viewBox="0 0 80 80" fill="none">
+          <path d="M4 4h32c16 0 28 12 28 28v32" stroke="#E5C158" stroke-width="1.8" />
+          <path d="M10 10h22c10 0 18 8 18 18v22" stroke="#E5C158" stroke-width="1" stroke-dasharray="2.5 2.5" />
+          <circle cx="64" cy="64" r="2.5" fill="#E5C158" />
+          <circle cx="4" cy="4" r="2.5" fill="#E5C158" />
+          <path d="M4 18c8 0 14 6 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <path d="M18 4c0 8 6 14 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <polygon points="20,20 23,17 26,20 23,23" fill="#E5C158" />
+        </svg>
+      </div>
+      <div class="cover-corner cover-corner-bl">
+        <svg viewBox="0 0 80 80" fill="none">
+          <path d="M4 4h32c16 0 28 12 28 28v32" stroke="#E5C158" stroke-width="1.8" />
+          <path d="M10 10h22c10 0 18 8 18 18v22" stroke="#E5C158" stroke-width="1" stroke-dasharray="2.5 2.5" />
+          <circle cx="64" cy="64" r="2.5" fill="#E5C158" />
+          <circle cx="4" cy="4" r="2.5" fill="#E5C158" />
+          <path d="M4 18c8 0 14 6 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <path d="M18 4c0 8 6 14 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <polygon points="20,20 23,17 26,20 23,23" fill="#E5C158" />
+        </svg>
+      </div>
+      <div class="cover-corner cover-corner-br">
+        <svg viewBox="0 0 80 80" fill="none">
+          <path d="M4 4h32c16 0 28 12 28 28v32" stroke="#E5C158" stroke-width="1.8" />
+          <path d="M10 10h22c10 0 18 8 18 18v22" stroke="#E5C158" stroke-width="1" stroke-dasharray="2.5 2.5" />
+          <circle cx="64" cy="64" r="2.5" fill="#E5C158" />
+          <circle cx="4" cy="4" r="2.5" fill="#E5C158" />
+          <path d="M4 18c8 0 14 6 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <path d="M18 4c0 8 6 14 14 14" stroke="#E5C158" stroke-width="1.2" />
+          <polygon points="20,20 23,17 26,20 23,23" fill="#E5C158" />
+        </svg>
+      </div>
 
       <div class="cover-content">
         <!-- Top Header Lockup with Seals -->
@@ -1086,8 +1203,13 @@
           <div class="cover-venue-line" contenteditable="true">
             Puerto Princesa City Library • Puerto Princesa City, Palawan
           </div>
-          <div class="cover-collab-text" contenteditable="true">
-            In Joint Cooperation with the National Library of the Philippines (NLP)
+          <div class="cover-bottom-flourish">
+            <span class="flourish-line"></span>
+            <span class="flourish-gem"></span>
+            <span class="flourish-line"></span>
+          </div>
+          <div class="cover-heritage-mark" contenteditable="true">
+            City Government of Puerto Princesa • Safeguarding Documentary Heritage
           </div>
         </div>
       </div>
