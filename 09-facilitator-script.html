@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Culminating Ceremonies & Graduation Script — PPCL Training-Workshop 2026</title>
+  <link rel="stylesheet" href="shared/theme.css" />
+  <style>
+    :root {
+      --navy-deep: #06152D;
+      --navy-royal: #0B2545;
+      --gold-primary: #C5A059;
+      --gold-bright: #E5C158;
+      --gold-light: #F8E7A2;
+      --bg-cream: #FDFBF7;
+      --ink-primary: #1F2430;
+      --ink-muted: #5C6479;
+      --cue-blue: #0284C7;
+      --cue-green: #16A34A;
+      --cue-amber: #D97706;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      background-color: #0E1624;
+      color: var(--ink-primary);
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 30px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Fixed Sticky Controller / Toolbar */
+    .script-toolbar {
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: 210mm;
+      max-width: calc(100vw - 32px);
+      background: rgba(6, 21, 45, 0.96);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(229, 193, 88, 0.55);
+      border-radius: 12px;
+      padding: 12px 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+      color: #FFFFFF;
+    }
+
+    .toolbar-meta h1 {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-meta p {
+      margin: 3px 0 0;
+      font-size: 11px;
+      color: #CBD5E1;
+    }
+
+    .toolbar-role-pill {
+      background: rgba(229, 193, 88, 0.2);
+      border: 1px solid var(--gold-bright);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .toolbar-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #E5C158, #C5A059);
+      color: #06152D;
+      box-shadow: 0 2px 10px rgba(229, 193, 88, 0.35);
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #F0D278, #D6B26A);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Teleprompter / Document Container */
+    .document-binder {
+      width: 210mm;
+      max-width: calc(100vw - 32px);
+      background: #FAF8F4;
+      border: 1px solid #D8C8A8;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Executive Binder Header */
+    .binder-hero-header {
+      background: linear-gradient(135deg, #06152D 0%, #0B2545 100%);
+      color: #FFFFFF;
+      padding: 30px 36px 24px;
+      border-bottom: 3px solid var(--gold-primary);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 8px 0 4px;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--gold-light);
+      margin: 0;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(229, 193, 88, 0.35);
+    }
+
+    .meta-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-label {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .meta-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: #F1F5F9;
+    }
+
+    /* Program Order Summary Table */
+    .summary-section {
+      padding: 24px 36px 18px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EAE2D2;
+    }
+
+    .section-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--navy-deep);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-tag::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #D8C8A8;
+    }
+
+    .flow-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+
+    .flow-table th {
+      background: #06152D;
+      color: var(--gold-bright);
+      text-align: left;
+      padding: 7px 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .flow-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #EAE2D2;
+      vertical-align: middle;
+    }
+
+    .flow-table tr:nth-child(even) {
+      background: #FAF8F4;
+    }
+
+    .time-badge {
+      font-weight: 800;
+      color: #06152D;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .part-badge {
+      display: inline-block;
+      background: rgba(11, 37, 69, 0.08);
+      color: #0B2545;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+    }
+
+    /* Main Script Body */
+    .script-body {
+      padding: 30px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Script Segment Block */
+    .script-block {
+      background: #FFFFFF;
+      border: 1px solid #D8C8A8;
+      border-radius: 8px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      position: relative;
+    }
+
+    .script-block.highlight {
+      border-left: 5px solid var(--gold-bright);
+      background: #FFFDF9;
+    }
+
+    .script-block.solemn {
+      border-left: 5px solid #06152D;
+    }
+
+    .script-block.awarding {
+      border-left: 5px solid #16A34A;
+      background: #F9FDF9;
+    }
+
+    .segment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid #EAE2D2;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .segment-number {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: #06152D;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .segment-time {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #8C6D23;
+      background: rgba(229, 193, 88, 0.18);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Stage Directions & Cues */
+    .stage-cue {
+      background: #F0F9FF;
+      border-left: 3px solid var(--cue-blue);
+      padding: 8px 12px;
+      margin: 10px 0 14px;
+      border-radius: 0 4px 4px 0;
+      font-size: 11px;
+      color: #0369A1;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stage-cue strong {
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-size: 9.5px;
+    }
+
+    /* Verbal Speech Text */
+    .speech-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #8C6D23;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .speech-text {
+      font-family: 'Georgia', serif;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #1F2430;
+      margin: 0 0 14px;
+    }
+
+    .speech-text strong {
+      color: #06152D;
+      font-weight: 700;
+    }
+
+    .speech-text em {
+      color: #8C6D23;
+      font-style: italic;
+    }
+
+    .pronunciation-tip {
+      background: #FEF3C7;
+      border: 1px solid #FCD34D;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #92400E;
+    }
+
+    /* Checklist Box for Facilitator */
+    .checklist-box {
+      background: #F8FAFC;
+      border: 1px dashed #CBD5E1;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+
+    .checklist-title {
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .checklist-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist-items li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #475569;
+    }
+
+    /* Print Formatting */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+      }
+      .script-toolbar {
+        display: none !important;
+      }
+      .document-binder {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .script-block {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================
+       FLOATING CONTROLLER / TOOLBAR
+       ======================================================== -->
+  <div class="script-toolbar">
+    <div class="toolbar-meta">
+      <h1>
+        Facilitator &amp; Emcee Master Script
+        <span class="toolbar-role-pill">Don Angel Lou M. Salvatierra</span>
+      </h1>
+      <p>Culminating &amp; Graduation Ceremonies • PPCL Training-Workshop 2026</p>
+    </div>
+    <div class="toolbar-btns">
+      <a href="index.html" class="btn btn-outline">Studio Hub</a>
+      <a href="08-event-program-a4.html" class="btn btn-outline">Event Program</a>
+      <button onclick="window.print()" class="btn btn-gold">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Cue Script
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MASTER SCRIPT DOCUMENT BINDER
+       ======================================================== -->
+  <main class="document-binder">
+
+    <!-- Executive Title Banner -->
+    <header class="binder-hero-header">
+      <div class="hero-eyebrow">
+        <span>PUERTO PRINCESA CITY LIBRARY</span>
+        <span>•</span>
+        <span>NATIONAL LIBRARY OF THE PHILIPPINES</span>
+      </div>
+      <h1 class="hero-title">Culminating Ceremonies &amp; Graduation Script</h1>
+      <p class="hero-subtitle">
+        Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections
+      </p>
+
+      <div class="hero-meta-grid">
+        <div class="meta-box">
+          <span class="meta-label">Designated Facilitator / Emcee</span>
+          <span class="meta-val">Don Angel Lou M. Salvatierra, Admin Asst I</span>
+        </div>
+        <div class="meta-box">
+          <span class="meta-label">Date &amp; Scheduled Time</span>
+          <span class="meta-val">Friday, November 6, 2026 • 3:30 PM – 5:00 PM</span>
+        </div>
+        <div class="meta-box">
+          <span class="meta-label">Venue</span>
+          <span class="meta-val">Conference Hall, Puerto Princesa City Library</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Part I: Culmination Flow Summary -->
+    <section class="summary-section">
+      <div class="section-tag">Official Order of Culminating Program</div>
+      <table class="flow-table">
+        <thead>
+          <tr>
+            <th style="width: 16%;">Time</th>
+            <th style="width: 38%;">Ceremonial Activity</th>
+            <th style="width: 46%;">Person(s) Involved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-badge">3:30 – 3:35 PM</td>
+            <td><strong>Processional &amp; Formal Call to Order</strong></td>
+            <td>Don Angel Lou M. Salvatierra (Emcee / Facilitator)</td>
+          </tr>
+          <tr>
+            <td class="time-badge">3:35 – 3:42 PM</td>
+            <td><strong>Doxology &amp; Philippine National Anthem</strong></td>
+            <td>Secretariat / Audio-Visual Presentation</td>
+          </tr>
+          <tr>
+            <td class="time-badge">3:42 – 3:50 PM</td>
+            <td><strong>Training-Workshop Synthesis &amp; Accomplishments</strong></td>
+            <td>Facilitator Report / Audio-Visual Photo Reel</td>
+          </tr>
+          <tr>
+            <td class="time-badge">3:50 – 4:05 PM</td>
+            <td><strong>Participants' Voices: Impressions &amp; Testimonials</strong></td>
+            <td>Representative from Academic Libraries &amp; Public/LGU Records</td>
+          </tr>
+          <tr>
+            <td class="time-badge">4:05 – 4:20 PM</td>
+            <td><strong>Response &amp; Words of Inspiration (NLP Guests)</strong></td>
+            <td>Mr. Alexander B. Vetus, Mr. Genkie P. Albano &amp; Ms. Geraldine T. Francia, RL</td>
+          </tr>
+          <tr>
+            <td class="time-badge">4:20 – 4:45 PM</td>
+            <td><strong>Conferment of Graduates &amp; Awarding of Certificates</strong></td>
+            <td>Ms. Joymarie M. Olape, RL &amp; Resource Persons (Assisted by Emcee)</td>
+          </tr>
+          <tr>
+            <td class="time-badge">4:45 – 4:55 PM</td>
+            <td><strong>Closing Remarks &amp; Archival Charge</strong></td>
+            <td>Ms. Joymarie M. Olape, RL (City Librarian, PPCL)</td>
+          </tr>
+          <tr>
+            <td class="time-badge">4:55 – 5:00 PM</td>
+            <td><strong>Grand Photo Opportunity &amp; Formal Adjournment</strong></td>
+            <td>All Dignitaries, Resource Persons, and Graduating Participants</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Part II: Detailed Verbal Script & Teleprompter -->
+    <section class="script-body">
+
+      <!-- SEGMENT 1: PRE-PROGRAM HOUSEKEEPING -->
+      <article class="script-block">
+        <div class="segment-header">
+          <span class="segment-number">1. Pre-Program Housekeeping &amp; Gathering</span>
+          <span class="segment-time">3:25 PM – 3:30 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Stand at the podium. Soft ambient instrumental music playing. Ensure wireless microphone audio level is checked. Ensure evaluation forms / post-tests have been retrieved by the secretariat.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "Good afternoon, ladies and gentlemen, honored resource persons, and our hardworking participants! May I kindly request everyone to please take your designated seats as we are about to formally commence our <strong>Culminating Ceremonies and Graduation</strong> for our 3-day <em>Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections</em>."
+        </p>
+        <p class="speech-text">
+          "Please make sure you have turned in your Post-Test questionnaires and Training Evaluation sheets to our secretariat at the registration table. Also, please have your finished handcrafted outputs—your sewn books and archival softbound volumes—neatly arranged beside you for our formal class documentation later. Thank you very much!"
+        </p>
+
+        <div class="checklist-box">
+          <div class="checklist-title">Facilitator Checklist before starting:</div>
+          <ul class="checklist-items">
+            <li>✓ Dignitaries seated at VIP front table</li>
+            <li>✓ Certificates arranged in alphabetical order</li>
+            <li>✓ Audio operator ready for National Anthem</li>
+            <li>✓ Official photographer in position</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- SEGMENT 2: CALL TO ORDER & OPENING SPIEL -->
+      <article class="script-block highlight">
+        <div class="segment-header">
+          <span class="segment-number">2. Formal Opening &amp; Welcome Spiel</span>
+          <span class="segment-time">3:30 PM – 3:35 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Warm, energetic, dignified posture. Smile and establish eye contact across the entire hall.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "A pleasant, blessed, and victorious Friday afternoon to each and every one of you! To our dedicated City Librarian, <strong>Ms. Joymarie M. Olape, RL</strong>; to our esteemed mentors and conservation champions from the National Library of the Philippines—<strong>Mr. Alexander B. Vetus</strong>, <strong>Mr. Genkie P. Albano</strong>, and <strong>Ms. Geraldine T. Francia, RL</strong>; to our hardworking library staff, records custodians, school librarians, and heritage guardians across the City of Puerto Princesa—welcome to the grand culmination of our three-day journey!"
+        </p>
+        <p class="speech-text">
+          "For the past three days, from Wednesday morning through this very afternoon, our hands have been covered in archival paste, our fingers have felt the bite of bone folders and needles, our eyes have scrutinized century-old documents, and our minds have been enriched with the timeless craft of bookbinding, softbound compiling, and phase boxing. Today, we gather not just to conclude a workshop, but to <strong>celebrate our transformation into certified custodians of documentary heritage</strong>!"
+        </p>
+        <p class="speech-text">
+          "I am your facilitator and program emcee, <strong>Don Angel Lou Salvatierra</strong>, and it is my absolute honor to guide you through this momentous celebration."
+        </p>
+      </article>
+
+      <!-- SEGMENT 3: SOLEMN INVOCATION & ANTHEM -->
+      <article class="script-block solemn">
+        <div class="segment-header">
+          <span class="segment-number">3. Doxology &amp; Philippine National Anthem</span>
+          <span class="segment-time">3:35 PM – 3:42 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Tone shifts to solemn, respectful, and dignified. Signal sound booth to cue audio.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "To formally begin our program and dedicate our accomplishments to the Almighty, as well as render honor to our beloved Republic, may I invite everyone to please rise for our <strong>Solemn Invocation</strong>, followed immediately by the singing of the <strong>Philippine National Anthem</strong>."
+        </p>
+
+        <div class="stage-cue">
+          <strong>[AVP Plays: Doxology followed by Lupang Hinirang. Emcee remains standing at attention with right hand over chest.]</strong>
+        </div>
+
+        <p class="speech-text">
+          <em>(After the anthem concludes:)</em><br/>
+          "Thank you very much. Everyone may now be seated."
+        </p>
+      </article>
+
+      <!-- SEGMENT 4: TRAINING SYNTHESIS -->
+      <article class="script-block">
+        <div class="segment-header">
+          <span class="segment-number">4. Synthesis of Accomplishments</span>
+          <span class="segment-time">3:42 PM – 3:50 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Enthusiastic, narrative delivery. Highlight the tangible skills learned during each day of the training.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "Ladies and gentlemen, let us take a moment to look back at the incredible journey we embarked upon over the last 72 hours."
+        </p>
+        <p class="speech-text">
+          "On <strong>Day 1</strong>, we laid the scientific foundation. Under the expert guidance of our NLP resource persons, we learned the anatomy of paper deterioration—how humidity, pests, acidity, and human handling affect library collections. We rolled up our sleeves for dry cleaning, fastener and rusted staple removal, tear mending using Japanese tissue, and the encapsulation of fragile loose sheets."
+        </p>
+        <p class="speech-text">
+          "On <strong>Day 2</strong>, the real muscle work began! In the morning, Mr. Alexander Vetus walked us through traditional book binding: punching precise signatures with the awl, stitching with archival linen thread, applying the kettle stitch, lining the spine, and constructing custom casings. In the afternoon, Mr. Genkie Albano introduced us to the practical art of newspaper and periodical softbound compilation, turning loose, bulky serial issues into resilient, readable bound volumes."
+        </p>
+        <p class="speech-text">
+          "And finally, today on <strong>Day 3</strong>, you defended your craftsmanship, showcased your archival phase boxes, received thorough critique, and proved that every single participant in this hall has mastered the basic standards of conservation! Give yourselves a tremendous, well-deserved round of applause!"
+        </p>
+      </article>
+
+      <!-- SEGMENT 5: PARTICIPANTS' IMPRESSIONS -->
+      <article class="script-block">
+        <div class="segment-header">
+          <span class="segment-number">5. Voices from the Field: Participants' Impressions</span>
+          <span class="segment-time">3:50 PM – 4:05 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Call forward the pre-selected participant representatives to share a 3-minute testimonial each.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "A training-workshop is truly measured not by the hours spent in lecture, but by how it ignites the dedication of those who attended. At this juncture, we would like to hear from our participants—their learnings, their challenges, and their vision for applying these skills in their respective institutions."
+        </p>
+        <p class="speech-text">
+          "To share their impressions representing our <strong>Academic and School Libraries Sector</strong>, let us warmly welcome <strong>[Name of Participant 1 / School Representative]</strong>. A warm round of applause, please!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Participant 1 Delivers Impression — approx. 3 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Thank you very much, <strong>[Name of Participant 1]</strong>, for those inspiring words. Indeed, bringing conservation practices directly into our school and university libraries safeguards our students' intellectual resources."
+        </p>
+        <p class="speech-text">
+          "Next, to share impressions on behalf of our <strong>Public Libraries and LGU Records Custodians</strong>, let us call on <strong>[Name of Participant 2 / Barangay or LGU Representative]</strong>. Let's give them a warm round of applause!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Participant 2 Delivers Impression — approx. 3 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Thank you so much, <strong>[Name of Participant 2]</strong>! Hearing your passion assures us that our local government documents and historical records are in capable, caring hands."
+        </p>
+      </article>
+
+      <!-- SEGMENT 6: RESPONSE FROM NLP GUESTS -->
+      <article class="script-block highlight">
+        <div class="segment-header">
+          <span class="segment-number">6. Response &amp; Words of Inspiration from NLP Mentors</span>
+          <span class="segment-time">4:05 PM – 4:20 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Introduce the NLP Resource Speakers with immense respect and institutional gratitude.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "At this point, we are honored to listen to the mentors who patiently taught us, held our hands during tricky needle threading, and generously imparted decades of National Library expertise."
+        </p>
+        <p class="speech-text">
+          "First, to share his reflections and message to the graduating batch, let us welcome our master bookbinding mentor, Administrative Assistant III from the National Library of the Philippines, <strong>Mr. Alexander B. Vetus</strong>! Let's welcome him with warm applause!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Mr. Alexander B. Vetus delivers message — 3-4 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Maraming salamat, Sir Alex! Your patience and mastery of book craftsmanship have truly left an indelible mark on every participant."
+        </p>
+        <p class="speech-text">
+          "Now, let us welcome our expert in newspaper binding and preservation techniques, also an Administrative Assistant III from the National Library of the Philippines, <strong>Mr. Genkie P. Albano</strong>! A round of applause for Sir Genkie!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Mr. Genkie P. Albano delivers message — 3-4 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Thank you very much, Sir Genkie, for your invaluable encouragement and practical guidance!"
+        </p>
+        <p class="speech-text">
+          "To complete our panel of honored mentors from the National Library of the Philippines, let us hear from Librarian III, <strong>Ms. Geraldine T. Francia, RL</strong>! Let's welcome Ma'am Geraldine with enthusiastic applause!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Ms. Geraldine T. Francia delivers message — 3-4 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Thank you, Ma'am Geraldine! The partnership between the National Library of the Philippines and the City of Puerto Princesa stands strong because of champions like you."
+        </p>
+      </article>
+
+      <!-- SEGMENT 7: AWARDING OF CERTIFICATES -->
+      <article class="script-block awarding">
+        <div class="segment-header">
+          <span class="segment-number">7. Awarding of Certificates of Recognition &amp; Completion</span>
+          <span class="segment-time">4:20 PM – 4:45 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> High energy, celebratory pace. Invite City Librarian Joymarie M. Olape to stage.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "And now, we come to the most anticipated highlight of this afternoon: the <strong>Conferment and Awarding of Certificates</strong>!"
+        </p>
+        <p class="speech-text">
+          "May I invite our esteemed City Librarian, <strong>Ms. Joymarie M. Olape, RL</strong>, to please join me on stage to lead the presentation of certificates."
+        </p>
+
+        <!-- PART A: PLAQUES / APPRECIATION TO NLP -->
+        <p class="speech-text" style="border-top: 1px dashed #C5A059; padding-top: 8px;">
+          <strong>[Part A: Certificates of Appreciation to NLP Resource Speakers]</strong><br/>
+          "First, as a token of our profound gratitude for their selfless dedication in sharing their specialized knowledge and technical craftsmanship with the library community of Puerto Princesa, we present the <strong>Certificate of Appreciation</strong> to our Resource Persons:"
+        </p>
+        <p class="speech-text">
+          <em>(Read citation clearly):</em><br/>
+          "For his invaluable services as Resource Speaker, imparting technical expertise in book binding and conservation science... Our first Certificate of Appreciation is awarded to <strong>MR. ALEXANDER B. VETUS</strong>! Let's give him a big round of applause!"<br/>
+          <em>[Pause for photo handshake]</em>
+        </p>
+        <p class="speech-text">
+          "Next, for his dedicated sharing of knowledge and practical mastery in newspaper binding and softbound collection preservation... Our second Certificate of Appreciation is awarded to <strong>MR. GENKIE P. ALBANO</strong>! A hearty round of applause!"<br/>
+          <em>[Pause for photo handshake]</em>
+        </p>
+        <p class="speech-text">
+          "And for her leadership, guidance, and institutional support ensuring the resounding success of this collaborative program... The Certificate of Appreciation is proudly presented to <strong>MS. GERALDINE T. FRANCIA, RL</strong>! Congratulations and thank you, Ma'am Geraldine!"<br/>
+          <em>[Pause for photo handshake]</em>
+        </p>
+
+        <!-- PART B: CERTIFICATES OF PARTICIPATION -->
+        <p class="speech-text" style="border-top: 1px dashed #C5A059; padding-top: 8px;">
+          <strong>[Part B: Certificates of Participation &amp; Completion to Graduates]</strong><br/>
+          "May we also request our NLP mentors to stay on stage with Ma'am Joymarie to assist in awarding the Certificates of Completion to our graduates!"
+        </p>
+        <p class="speech-text">
+          "Participants, as your name is called, please proceed to the stage from the right aisle, receive your certificate, pause for the official photo, and return via the left aisle."
+        </p>
+        <p class="speech-text">
+          "The Certificate of Participation is awarded to each delegate for having successfully completed the intensive 24 hours of lecture and practical workshops on the <em>Basic Preservation and Conservation of Paper-Based Collections</em>, held from November 4 to 6, 2026 at the Puerto Princesa City Library."
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Emcee calls each participant name clearly and with dignity. Pause briefly between names for applause and camera flash.]</strong><br/>
+          <em>Tip: "1. [Participant Name] ... 2. [Participant Name] ... 3. [Participant Name]..."</em>
+        </div>
+
+        <p class="speech-text">
+          "Congratulations to all our graduates! Let us give our new Certified Heritage Preservationists a resounding round of applause!"
+        </p>
+      </article>
+
+      <!-- SEGMENT 8: CLOSING REMARKS -->
+      <article class="script-block highlight">
+        <div class="segment-header">
+          <span class="segment-number">8. Official Closing Remarks &amp; Archival Charge</span>
+          <span class="segment-time">4:45 PM – 4:55 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Warm, deferential tone introducing the City Librarian.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "To formally deliver the closing reflections and send us forth with a renewed mission to safeguard the written memory of Puerto Princesa, it is our distinct privilege to hear from the woman whose vision, leadership, and heart have made this entire training a reality."
+        </p>
+        <p class="speech-text">
+          "Ladies and gentlemen, let us give our most respectful and warmest applause to our City Librarian, <strong>MS. JOYMARIE M. OLAPE, RL</strong>!"
+        </p>
+
+        <div class="stage-cue">
+          <strong>[Ms. Joymarie M. Olape delivers Closing Remarks &amp; Archival Charge — 7-10 minutes]</strong>
+        </div>
+
+        <p class="speech-text">
+          "Thank you very much, Ma'am Joymarie, for those inspiring words and for always reminding us that every book we mend, every document we stitch, and every archive we preserve is a love letter to our future generations."
+        </p>
+      </article>
+
+      <!-- SEGMENT 9: GRAND PHOTO OP & SIGN-OFF -->
+      <article class="script-block solemn">
+        <div class="segment-header">
+          <span class="segment-number">9. Grand Photo Opportunity &amp; Official Adjournment</span>
+          <span class="segment-time">4:55 PM – 5:00 PM</span>
+        </div>
+
+        <div class="stage-cue">
+          <strong>Stage Cue:</strong> Enthusiastic, coordinating stage crowd for a dynamic group picture.
+        </div>
+
+        <span class="speech-label">Facilitator Speech:</span>
+        <p class="speech-text">
+          "Before we officially depart, we want to capture this proud moment for posterity! May I invite all participants, facilitators, secretariat, and our honorable resource persons to assemble here in front of our stage backdrop for our <strong>Official Batch Photo</strong>."
+        </p>
+        <p class="speech-text">
+          "For our first shot, please hold your Certificates of Completion proudly in front of you with your brightest smiles! Ready... One, two, three, smile!"
+        </p>
+        <p class="speech-text">
+          "Now, for our second shot—the artisan shot! Please raise the hand-bound books and archival volumes you personally stitched and bound over the last two days! Show off your craftsmanship! Ready... One, two, three, thumbs up!"
+        </p>
+        <p class="speech-text">
+          "And for our final shot: the iconic Puerto Princesa City Library gesture of excellence! One, two, three, cheers!"
+        </p>
+        <p class="speech-text" style="border-top: 1px solid #D8C8A8; padding-top: 12px; margin-top: 14px;">
+          "On behalf of the City Government of Puerto Princesa, the Puerto Princesa City Library, and the National Library of the Philippines, congratulations once again to Batch 2026! May your needles stay sharp, your thread remain sturdy, and your dedication to cultural preservation burn brightly!"
+        </p>
+        <p class="speech-text">
+          "This is your facilitator and proud colleague, <strong>Don Angel Lou Salvatierra</strong>, officially bringing our <em>Training-Workshop on Basic Preservation and Conservation of Paper-Based Collections</em> to a victorious close! Have a safe journey home, and God bless us all! Mabuhay ang Kulturang Pilipino!"
+        </p>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>
